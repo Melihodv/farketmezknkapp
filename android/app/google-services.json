@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "768393681101",
+    "project_id": "farketmezknk-257ca",
+    "storage_bucket": "farketmezknk-257ca.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:768393681101:android:40b6fcdb41d78ba576b184",
+        "android_client_info": {
+          "package_name": "com.farketmezknk.farketmez_knk"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6kbeJyzoQ_Ym1SmM9R4dEmLBzZSVbgWs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
