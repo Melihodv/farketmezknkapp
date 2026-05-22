@@ -22,17 +22,17 @@ class DefaultFirebaseOptions {
     }
   }
 
-  // Web
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyC6kbeJyzoQ_Ym1SmM9R4dEmLBzZSVbgWs',
-    appId: '1:768393681101:web:farketmezknk',
+    apiKey: 'AIzaSyDagKKoLYNhAz3DB3akgtWSsVdCNSrc6d4',
+    appId: '1:768393681101:web:0386c868884c4d0076b184',
     messagingSenderId: '768393681101',
     projectId: 'farketmezknk-257ca',
-    storageBucket: 'farketmezknk-257ca.firebasestorage.app',
     authDomain: 'farketmezknk-257ca.firebaseapp.com',
+    storageBucket: 'farketmezknk-257ca.firebasestorage.app',
   );
 
-  // Android — com.farketmezknk.farketmez_knk
+  // Web
+
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyC6kbeJyzoQ_Ym1SmM9R4dEmLBzZSVbgWs',
     appId: '1:768393681101:android:40b6fcdb41d78ba576b184',
@@ -41,13 +41,18 @@ class DefaultFirebaseOptions {
     storageBucket: 'farketmezknk-257ca.firebasestorage.app',
   );
 
-  // iOS — com.farketmezknk (Bundle ID)
+  // Android — com.farketmezknk.farketmez_knk
+
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyBKDB7N3DnBSyKV9FtS_izn-RJzKNgT6ro',
-    appId: '1:768393681101:ios:a1f60039d953dc4f76b184',
+    appId: '1:768393681101:ios:a193e618e0858d7976b184',
     messagingSenderId: '768393681101',
     projectId: 'farketmezknk-257ca',
     storageBucket: 'farketmezknk-257ca.firebasestorage.app',
-    iosBundleId: 'com.farketmezknk',
+    androidClientId: '768393681101-9rrrr8vndamla7fst18eg5kdcrn5t4tg.apps.googleusercontent.com',
+    iosClientId: '768393681101-gtaqbalbuo3q3r1l9j62l4kh7dlf7tfo.apps.googleusercontent.com',
+    iosBundleId: 'com.farketmezknk.farketmezKnk',
   );
+
+  // iOS — com.farketmezknk (Bundle ID)
 }

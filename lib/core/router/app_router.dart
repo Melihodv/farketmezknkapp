@@ -7,6 +7,9 @@ import '../../features/feedback/feedback_screen.dart';
 import '../../features/memory/memory_screen.dart';
 import '../../features/profile/profile_screen.dart';
 import '../../features/profile/privacy_policy_screen.dart';
+import '../../features/profile/terms_of_use_screen.dart';
+import '../../features/findit/find_it_screen.dart';
+import '../../features/roulette/roulette_screen.dart';
 
 final GoRouter appRouter = GoRouter(
   initialLocation: '/',
@@ -39,5 +42,18 @@ final GoRouter appRouter = GoRouter(
       path: '/privacy',
       builder: (context, state) => const PrivacyPolicyScreen(),
     ),
+    GoRoute(
+      path: '/terms',
+      builder: (context, state) => const TermsOfUseScreen(),
+    ),
+    GoRoute(
+      path: '/findit',
+      builder: (context, state) => const FindItScreen(),
+    ),
+    GoRoute(
+      path: '/roulette',
+      builder: (context, state) => const RouletteScreen(),
+    ),
   ],
 );
+

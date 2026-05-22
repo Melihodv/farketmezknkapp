@@ -4,8 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:go_router/go_router.dart';
 import '../../core/theme/app_theme.dart';
 
-class PrivacyPolicyScreen extends StatelessWidget {
-  const PrivacyPolicyScreen({super.key});
+class TermsOfUseScreen extends StatelessWidget {
+  const TermsOfUseScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class PrivacyPolicyScreen extends StatelessWidget {
           onTap: () => context.pop(),
           child: const Icon(Icons.arrow_back_ios_rounded, color: AppTheme.textPrimary, size: 20),
         ),
-        title: Text('Gizlilik Politikası',
+        title: Text('Kullanım Koşulları',
             style: GoogleFonts.plusJakartaSans(fontSize: 18, fontWeight: FontWeight.w700, color: AppTheme.textPrimary)),
         centerTitle: true,
       ),
@@ -36,9 +36,9 @@ class PrivacyPolicyScreen extends StatelessWidget {
               boxShadow: AppTheme.accentShadow,
             ),
             child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              const Icon(Icons.shield_rounded, color: Colors.white, size: 32),
+              const Icon(Icons.gavel_rounded, color: Colors.white, size: 32),
               const SizedBox(height: 10),
-              Text('Gizliliğiniz\nBizim İçin Önemli',
+              Text('Hizmet Şartları ve\nKurallarımız',
                   style: GoogleFonts.plusJakartaSans(fontSize: 20, fontWeight: FontWeight.w800, color: Colors.white, height: 1.2)),
               const SizedBox(height: 6),
               Text('Son Güncelleme: 10 Mayıs 2026',
@@ -49,33 +49,27 @@ class PrivacyPolicyScreen extends StatelessWidget {
           const SizedBox(height: 20),
 
           _intro(
-            'Ottovate ("biz", "bize" veya "bizim"), Farketmez Kanka adlı mobil uygulamayı geliştirmiş ve sunmaktadır. Bu Gizlilik Politikası, Uygulamamızı kullandığınızda kişisel verilerinizin nasıl toplandığını, kullanıldığını ve paylaşıldığını açıklamaktadır.\n\nUygulamamızı indirerek veya kullanarak bu politikadaki şartları kabul etmiş olursunuz.',
+            'Lütfen Farketmez Kanka mobil uygulamasını kullanmadan önce bu Kullanım Koşulları\'nı ("Koşullar") dikkatlice okuyunuz. Uygulamaya erişerek veya kullanarak bu koşullara tabi olmayı kabul etmiş olursunuz.',
           ),
 
           const SizedBox(height: 16),
 
           _section(
             number: '1',
-            title: 'Toplanan Bilgiler ve Kullanım Amaçları',
-            icon: Icons.data_usage_rounded,
+            title: 'Hizmetin Amacı ve Kullanımı',
+            icon: Icons.explore_rounded,
             items: [
               _PolicyItem(
-                icon: Icons.location_on_rounded,
-                title: 'Konum Bilgileri',
+                icon: Icons.check_circle_outline_rounded,
+                title: 'Öneri Sistemi',
                 body:
-                    'Uygulamamız, size en uygun mekanları önermek, mesafe hesaplamaları yapmak ve harita hizmetlerini sunabilmek amacıyla cihazınızın konum servislerine (GPS ve ağ tabanlı konum) erişim sağlar. Konum verileriniz anlık olarak işlenir ve sunucularımızda kalıcı olarak depolanmaz. Harita ve konum işlevleri için Google Maps API kullanılmaktadır.',
+                    'Farketmez Kanka, kullanıcılarına bulundukları konuma ve tercihlerine göre mekan önerileri sunan bir rehberlik uygulamasıdır. Sunulan mekanlar ve aktiviteler tamamen tavsiye niteliğindedir.',
               ),
               _PolicyItem(
-                icon: Icons.person_rounded,
-                title: 'Hesap Bilgileri (Google & Apple)',
+                icon: Icons.warning_amber_rounded,
+                title: 'Doğruluk Garantisi Yoktur',
                 body:
-                    'Giriş yapmayı tercih etmeniz halinde adınız, e-posta adresiniz ve profil fotoğrafınız (sadece Google veya Apple tarafından sağlanan temel veriler) Firebase altyapısında güvenli bir şekilde saklanır. Bu veriler uygulamayı kişiselleştirmek için kullanılır.',
-              ),
-              _PolicyItem(
-                icon: Icons.phone_android_rounded,
-                title: 'Kullanım ve Cihaz Verileri',
-                body:
-                    'Uygulamanın performansını artırmak ve hataları gidermek amacıyla anonimleştirilmiş cihaz bilgileri toplanabilir.',
+                    'Uygulama, mekan verilerini üçüncü taraf API\'ler (Örn: Google Maps) üzerinden sağlar. Mekanların açıklığı, çalışma saatleri veya sunduğu hizmetlerdeki değişikliklerden Ottovate sorumlu tutulamaz. Gitmeden önce ilgili mekanı teyit etmeniz tavsiye edilir.',
               ),
             ],
           ),
@@ -84,23 +78,18 @@ class PrivacyPolicyScreen extends StatelessWidget {
 
           _section(
             number: '2',
-            title: 'Üçüncü Taraf Hizmet Sağlayıcılar',
-            icon: Icons.hub_rounded,
+            title: 'Hesap Sorumlulukları',
+            icon: Icons.person_outline_rounded,
             items: [
               _PolicyItem(
-                icon: Icons.android_rounded,
-                title: 'Google Play Services',
-                body: 'Uygulama güvenliği ve temel Android servisleri için kullanılmaktadır.',
+                icon: Icons.shield_rounded,
+                title: 'Giriş Yöntemleri',
+                body: 'Uygulamayı Misafir modunda veya Google/Apple hesabınızla bağlayarak kullanabilirsiniz. Hesap güvenliğinizi sağlamak sizin sorumluluğunuzdadır.',
               ),
               _PolicyItem(
-                icon: Icons.map_rounded,
-                title: 'Google Maps Platform',
-                body: 'Mekan arama, harita gösterimi ve mesafe hesaplama işlemleri için kullanılmaktadır.',
-              ),
-              _PolicyItem(
-                icon: Icons.analytics_rounded,
-                title: 'Firebase Analytics & Crashlytics',
-                body: 'Kullanıcı etkileşimlerini analiz etme ve çökme raporları için kullanılmaktadır.',
+                icon: Icons.delete_forever_rounded,
+                title: 'Hesabın Sonlandırılması',
+                body: 'Profil bölümünde bulunan "Hesabımı Sil" butonuyla hesabınızı ve uygulamanın kaydettiği tüm verilerinizi kalıcı olarak silebilirsiniz.',
               ),
             ],
           ),
@@ -109,46 +98,14 @@ class PrivacyPolicyScreen extends StatelessWidget {
 
           _section(
             number: '3',
-            title: 'Veri Güvenliği',
-            icon: Icons.lock_rounded,
+            title: 'Fikri Mülkiyet Hakları',
+            icon: Icons.copyright_rounded,
             items: [
               _PolicyItem(
-                icon: Icons.security_rounded,
-                title: 'Güvenlik Önlemleri',
+                icon: Icons.app_shortcut_rounded,
+                title: 'Uygulama İçi İçerikler',
                 body:
-                    'Verilerinizin güvenliğini önemsiyoruz. Topladığımız anonim verileri ve anlık konum bilgilerinizi yetkisiz erişime, değiştirilmeye veya sızdırılmaya karşı korumak için endüstri standartlarında güvenlik önlemleri almaktayız. Ancak, internet üzerinden yapılan hiçbir veri aktarımının %100 güvenli olmadığını hatırlatmak isteriz.',
-              ),
-            ],
-          ),
-
-          const SizedBox(height: 12),
-
-          _section(
-            number: '4',
-            title: 'Çocukların Gizliliği',
-            icon: Icons.child_care_rounded,
-            items: [
-              _PolicyItem(
-                icon: Icons.family_restroom_rounded,
-                title: '13 Yaş Altı Politikası',
-                body:
-                    'Uygulamamız genel kitleye hitap etmekte olup, bilerek 13 yaşın altındaki çocuklardan kişisel veri toplamamaktadır. 13 yaşın altındaki bir çocuğun bize kişisel bilgilerini sağladığını fark edersek, bu bilgileri derhal sistemlerimizden sileriz.',
-              ),
-            ],
-          ),
-
-          const SizedBox(height: 12),
-
-          _section(
-            number: '5',
-            title: 'Gizlilik Politikasındaki Değişiklikler',
-            icon: Icons.update_rounded,
-            items: [
-              _PolicyItem(
-                icon: Icons.notification_important_rounded,
-                title: 'Güncellemeler',
-                body:
-                    'Bu Gizlilik Politikası\'nı zaman zaman güncelleyebiliriz. Herhangi bir değişiklik yapmamız durumunda, güncellenmiş politikayı bu sayfada yayınlayarak ve "Son Güncelleme Tarihi"ni değiştirerek sizi bilgilendireceğiz.',
+                    'Uygulamanın kodları, tasarımı, logoları, metinleri ve genel konseptinin tüm telif hakları Ottovate\'e aittir. İzinsiz kopyalanması veya ticari amaçlarla kullanılması yasaktır.',
               ),
             ],
           ),
@@ -171,15 +128,12 @@ class PrivacyPolicyScreen extends StatelessWidget {
                   child: const Icon(Icons.contact_mail_rounded, color: AppTheme.accent, size: 18),
                 ),
                 const SizedBox(width: 10),
-                Text('6. İletişim',
+                Text('4. İletişim',
                     style: GoogleFonts.plusJakartaSans(fontSize: 16, fontWeight: FontWeight.w700, color: AppTheme.textPrimary)),
               ]),
               const SizedBox(height: 12),
               _contactRow(Icons.business_rounded, 'Geliştirici', 'Ottovate'),
-              const SizedBox(height: 6),
               _contactRow(Icons.email_rounded, 'E-posta', 'info@ottovate.com.tr'),
-              const SizedBox(height: 6),
-              _contactRow(Icons.language_rounded, 'Web Sitesi', 'www.ottovate.com.tr'),
             ]),
           ).animate().fadeIn(duration: 400.ms, delay: 300.ms),
 
@@ -254,12 +208,15 @@ class PrivacyPolicyScreen extends StatelessWidget {
   }
 
   Widget _contactRow(IconData icon, String label, String value) {
-    return Row(children: [
-      Icon(icon, size: 15, color: AppTheme.accent),
-      const SizedBox(width: 8),
-      Text('$label: ', style: GoogleFonts.plusJakartaSans(fontSize: 13, fontWeight: FontWeight.w600, color: AppTheme.textSecondary)),
-      Text(value, style: GoogleFonts.plusJakartaSans(fontSize: 13, color: AppTheme.textPrimary)),
-    ]);
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 6),
+      child: Row(children: [
+        Icon(icon, size: 15, color: AppTheme.accent),
+        const SizedBox(width: 8),
+        Text('$label: ', style: GoogleFonts.plusJakartaSans(fontSize: 13, fontWeight: FontWeight.w600, color: AppTheme.textSecondary)),
+        Text(value, style: GoogleFonts.plusJakartaSans(fontSize: 13, color: AppTheme.textPrimary)),
+      ]),
+    );
   }
 }
 

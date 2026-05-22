@@ -1,7 +1,7 @@
 name: farketmez_knk
 description: "Ne yapalım? Farketmez. - Arkadaş grupları için akıllı mekan öneri uygulaması"
 publish_to: 'none'
-version: 1.0.1+2
+version: 1.2.0+4
 
 environment:
   sdk: '>=3.2.0 <4.0.0'
@@ -58,6 +58,7 @@ dependencies:
   timezone: ^0.9.4
 
   cupertino_icons: ^1.0.8
+  sign_in_with_apple: ^8.0.0
 
 dev_dependencies:
   flutter_test:
@@ -71,7 +72,7 @@ flutter_launcher_icons:
   image_path: 'assets/icon/app_icon.png'
   min_sdk_android: 21
   remove_alpha_ios: true
-  background_color_ios: '#FF4500'
+  background_color_ios: '#7C3AED'
 
 flutter:
   uses-material-design: true

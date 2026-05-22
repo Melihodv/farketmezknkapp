@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../../core/theme/app_theme.dart';
-import '../../core/constants/app_constants.dart';
 import '../../core/providers/app_provider.dart';
 
 class FilterBottomSheet extends StatefulWidget {
@@ -52,20 +51,20 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
           Center(child: Container(width: 40, height: 4, decoration: BoxDecoration(color: AppTheme.cardBorder, borderRadius: BorderRadius.circular(2)))),
           const SizedBox(height: 20),
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            Text('Tercihler', style: GoogleFonts.outfit(fontSize: 20, fontWeight: FontWeight.w700, color: AppTheme.textPrimary)),
+            Text('Tercihler', style: GoogleFonts.plusJakartaSans(fontSize: 20, fontWeight: FontWeight.w700, color: AppTheme.textPrimary)),
             GestureDetector(
               onTap: _save,
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 9),
                 decoration: BoxDecoration(gradient: AppTheme.accentGradient, borderRadius: BorderRadius.circular(20), boxShadow: AppTheme.accentShadow),
-                child: Text('Kaydet', style: GoogleFonts.outfit(fontSize: 13, fontWeight: FontWeight.w600, color: Colors.white)),
+                child: Text('Kaydet', style: GoogleFonts.plusJakartaSans(fontSize: 13, fontWeight: FontWeight.w600, color: Colors.white)),
               ),
             ),
           ]),
           const SizedBox(height: 24),
 
           // ── Diyet ────────────────────────
-          Text('🥗  Diyet', style: GoogleFonts.outfit(fontSize: 12, fontWeight: FontWeight.w700, color: AppTheme.textTertiary, letterSpacing: 0.5)),
+          Text('🥗  Diyet', style: GoogleFonts.plusJakartaSans(fontSize: 12, fontWeight: FontWeight.w700, color: AppTheme.textTertiary, letterSpacing: 0.5)),
           const SizedBox(height: 10),
           _toggle(Icons.eco_rounded, 'Vejeteryanım', 'Et içermeyen mekanlar öne çıksın', _isVegetarian, (v) => setState(() => _isVegetarian = v)),
           const SizedBox(height: 8),
@@ -73,7 +72,7 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
           const SizedBox(height: 22),
 
           // ── Bütçe ─────────────────────────
-          Text('💰  Bütçe', style: GoogleFonts.outfit(fontSize: 12, fontWeight: FontWeight.w700, color: AppTheme.textTertiary, letterSpacing: 0.5)),
+          Text('💰  Bütçe', style: GoogleFonts.plusJakartaSans(fontSize: 12, fontWeight: FontWeight.w700, color: AppTheme.textTertiary, letterSpacing: 0.5)),
           const SizedBox(height: 10),
           Row(
             children: List.generate(3, (i) {
@@ -96,7 +95,7 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
                     child: Column(children: [
                       Icon(icons[i], color: sel ? Colors.white : AppTheme.textTertiary, size: 22),
                       const SizedBox(height: 6),
-                      Text(labels[i], style: GoogleFonts.outfit(fontSize: 11, fontWeight: FontWeight.w600, color: sel ? Colors.white : AppTheme.textTertiary), textAlign: TextAlign.center),
+                      Text(labels[i], style: GoogleFonts.plusJakartaSans(fontSize: 11, fontWeight: FontWeight.w600, color: sel ? Colors.white : AppTheme.textTertiary), textAlign: TextAlign.center),
                     ]),
                   ),
                 ),
@@ -125,8 +124,8 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
         ),
         const SizedBox(width: 12),
         Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Text(title, style: GoogleFonts.outfit(fontSize: 13, fontWeight: FontWeight.w600, color: AppTheme.textPrimary)),
-          Text(subtitle, style: GoogleFonts.outfit(fontSize: 11, color: AppTheme.textTertiary)),
+          Text(title, style: GoogleFonts.plusJakartaSans(fontSize: 13, fontWeight: FontWeight.w600, color: AppTheme.textPrimary)),
+          Text(subtitle, style: GoogleFonts.plusJakartaSans(fontSize: 11, color: AppTheme.textTertiary)),
         ])),
         Switch(value: val, onChanged: onChanged, activeThumbColor: Colors.white, activeTrackColor: AppTheme.accent, inactiveTrackColor: AppTheme.cardBorder),
       ]),

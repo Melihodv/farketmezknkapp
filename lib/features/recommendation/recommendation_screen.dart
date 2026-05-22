@@ -18,13 +18,37 @@ class RecommendationScreen extends StatefulWidget {
 
 class _RecommendationScreenState extends State<RecommendationScreen> {
   bool _goingConfirmed = false;
-  late String _outdoorActivity;
+  late String _activitySuggestion;
+  late String _activityLabel;
 
   @override
   void initState() {
     super.initState();
     final rng = Random();
-    _outdoorActivity = AppConstants.outdoorActivities[rng.nextInt(AppConstants.outdoorActivities.length)];
+    final provider = context.read<AppProvider>();
+    final groupId = provider.selectedGroupId;
+
+    switch (groupId) {
+      case 'solo':
+        _activitySuggestion = AppConstants.soloActivities[
+            rng.nextInt(AppConstants.soloActivities.length)];
+        _activityLabel = 'Yalnız Keyfi';
+        break;
+      case 'romantic':
+        _activitySuggestion = AppConstants.romanticActivities[
+            rng.nextInt(AppConstants.romanticActivities.length)];
+        _activityLabel = 'Sevgiliye Özel İpucu';
+        break;
+      case 'friends':
+        _activitySuggestion = AppConstants.friendsActivities[
+            rng.nextInt(AppConstants.friendsActivities.length)];
+        _activityLabel = 'Arkadaş Aktivitesi';
+        break;
+      default: // family veya diğerleri
+        _activitySuggestion = AppConstants.outdoorActivities[
+            rng.nextInt(AppConstants.outdoorActivities.length)];
+        _activityLabel = 'Aktivite Önerisi';
+    }
   }
 
   Future<void> _openMaps(double lat, double lng, String name) async {
@@ -51,13 +75,13 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
               child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
                 Container(
                   width: 80, height: 80,
-                  decoration: BoxDecoration(color: AppTheme.accentGlow, shape: BoxShape.circle),
+                  decoration: const BoxDecoration(color: AppTheme.accentGlow, shape: BoxShape.circle),
                   child: const Icon(Icons.search_off_rounded, color: AppTheme.accent, size: 40),
                 ),
                 const SizedBox(height: 20),
-                Text('Mekan Bulunamadı', style: GoogleFonts.outfit(fontSize: 20, fontWeight: FontWeight.w700, color: AppTheme.textPrimary)),
+                Text('Mekan Bulunamadı', style: GoogleFonts.plusJakartaSans(fontSize: 20, fontWeight: FontWeight.w700, color: AppTheme.textPrimary)),
                 const SizedBox(height: 8),
-                Text('Mesafeyi artır veya farklı kategori dene!', style: GoogleFonts.outfit(fontSize: 14, color: AppTheme.textSecondary), textAlign: TextAlign.center),
+                Text('Mesafeyi artır veya farklı kategori dene!', style: GoogleFonts.plusJakartaSans(fontSize: 14, color: AppTheme.textSecondary), textAlign: TextAlign.center),
                 const SizedBox(height: 28),
                 _btn(text: 'Geri Dön', onTap: () => context.pop()),
               ]),
@@ -101,14 +125,13 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
                   margin: const EdgeInsets.only(right: 12, top: 8),
                   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                   decoration: BoxDecoration(gradient: AppTheme.accentGradient, borderRadius: BorderRadius.circular(20)),
-                  child: Text('⭐ Öne Çıkan', style: GoogleFonts.outfit(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.white)),
+                  child: Text('⭐ Öne Çıkan', style: GoogleFonts.plusJakartaSans(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.white)),
                 ),
             ],
             flexibleSpace: FlexibleSpaceBar(
               background: Stack(
                 fit: StackFit.expand,
                 children: [
-                  // Photo
                   photoUrl.isNotEmpty
                       ? CachedNetworkImage(
                           imageUrl: photoUrl,
@@ -118,8 +141,6 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
                           errorWidget: (c, u, e) => _photoPlaceholder(catData),
                         )
                       : _photoPlaceholder(catData),
-
-                  // Gradient overlay
                   Positioned(
                     bottom: 0, left: 0, right: 0,
                     child: Container(
@@ -147,7 +168,7 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
                 children: [
 
                   // Prev visit warning
-                  if (visitRecord != null && (visitRecord.visitCount) > 0)
+                  if (visitRecord != null && visitRecord.visitCount > 0)
                     Container(
                       margin: const EdgeInsets.only(bottom: 14),
                       padding: const EdgeInsets.all(12),
@@ -159,7 +180,8 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
                       child: Row(children: [
                         const Icon(Icons.history_rounded, color: AppTheme.warning, size: 16),
                         const SizedBox(width: 8),
-                        Text('Buraya daha önce gittin (${visitRecord.visitCount} kez)', style: GoogleFonts.outfit(fontSize: 12, color: AppTheme.warning, fontWeight: FontWeight.w500)),
+                        Text('Buraya daha önce gittin (${visitRecord.visitCount} kez)',
+                            style: GoogleFonts.plusJakartaSans(fontSize: 12, color: AppTheme.warning, fontWeight: FontWeight.w500)),
                       ]),
                     ).animate().slideY(begin: -0.2, duration: 300.ms).fadeIn(duration: 300.ms),
 
@@ -170,7 +192,7 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
                     child: Row(mainAxisSize: MainAxisSize.min, children: [
                       Icon(_catIcon(place.category), color: AppTheme.accent, size: 13),
                       const SizedBox(width: 5),
-                      Text(catData['label'] as String, style: GoogleFonts.outfit(fontSize: 12, fontWeight: FontWeight.w600, color: AppTheme.accent)),
+                      Text(catData['label'] as String, style: GoogleFonts.plusJakartaSans(fontSize: 12, fontWeight: FontWeight.w600, color: AppTheme.accent)),
                     ]),
                   ).animate().fadeIn(duration: 400.ms, delay: 100.ms),
 
@@ -179,7 +201,7 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
                   // Name
                   Text(
                     place.name,
-                    style: GoogleFonts.outfit(fontSize: 28, fontWeight: FontWeight.w800, color: AppTheme.textPrimary, letterSpacing: -0.5, height: 1.1),
+                    style: GoogleFonts.plusJakartaSans(fontSize: 28, fontWeight: FontWeight.w800, color: AppTheme.textPrimary, letterSpacing: -0.5, height: 1.1),
                   ).animate().slideX(begin: -0.1, duration: 400.ms, delay: 150.ms).fadeIn(duration: 400.ms, delay: 150.ms),
 
                   const SizedBox(height: 6),
@@ -188,7 +210,9 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
                   Row(children: [
                     const Icon(Icons.location_on_rounded, color: AppTheme.textTertiary, size: 14),
                     const SizedBox(width: 4),
-                    Expanded(child: Text(place.address, style: GoogleFonts.outfit(fontSize: 13, color: AppTheme.textSecondary), maxLines: 2, overflow: TextOverflow.ellipsis)),
+                    Expanded(child: Text(place.address,
+                        style: GoogleFonts.plusJakartaSans(fontSize: 13, color: AppTheme.textSecondary),
+                        maxLines: 2, overflow: TextOverflow.ellipsis)),
                   ]).animate().fadeIn(duration: 400.ms, delay: 200.ms),
 
                   const SizedBox(height: 16),
@@ -213,32 +237,41 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
                     const SizedBox(height: 14),
                     Container(
                       padding: const EdgeInsets.all(14),
-                      decoration: BoxDecoration(color: AppTheme.accentGlow, borderRadius: BorderRadius.circular(14), border: Border.all(color: AppTheme.accent.withValues(alpha: 0.3))),
+                      decoration: BoxDecoration(
+                          color: AppTheme.accentGlow,
+                          borderRadius: BorderRadius.circular(14),
+                          border: Border.all(color: AppTheme.accent.withValues(alpha: 0.3))),
                       child: Row(children: [
                         const Icon(Icons.campaign_rounded, color: AppTheme.accent, size: 18),
                         const SizedBox(width: 10),
-                        Expanded(child: Text(place.sponsoredNote!, style: GoogleFonts.outfit(fontSize: 13, color: AppTheme.accent))),
+                        Expanded(child: Text(place.sponsoredNote!,
+                            style: GoogleFonts.plusJakartaSans(fontSize: 13, color: AppTheme.accent))),
                       ]),
                     ),
                   ],
 
-                  // Outdoor Activity Card
-                  if (place.category == 'outdoor') ...[
-                    const SizedBox(height: 16),
-                    Container(
-                      padding: const EdgeInsets.all(16),
-                      decoration: BoxDecoration(gradient: AppTheme.accentGradient, borderRadius: BorderRadius.circular(18), boxShadow: AppTheme.accentShadow),
-                      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                        Row(children: [
-                          const Icon(Icons.tips_and_updates_rounded, color: Colors.white, size: 16),
-                          const SizedBox(width: 6),
-                          Text('Aktivite Önerisi', style: GoogleFonts.outfit(fontSize: 11, fontWeight: FontWeight.w700, color: Colors.white70, letterSpacing: 0.3)),
-                        ]),
-                        const SizedBox(height: 8),
-                        Text(_outdoorActivity, style: GoogleFonts.outfit(fontSize: 14, fontWeight: FontWeight.w600, color: Colors.white, height: 1.4)),
+                  // Activity Card — her grup tipinde gösterilir
+                  const SizedBox(height: 16),
+                  Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                        gradient: AppTheme.accentGradient,
+                        borderRadius: BorderRadius.circular(18),
+                        boxShadow: AppTheme.accentShadow),
+                    child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                      Row(children: [
+                        const Icon(Icons.tips_and_updates_rounded, color: Colors.white, size: 16),
+                        const SizedBox(width: 6),
+                        Text(_activityLabel,
+                            style: GoogleFonts.plusJakartaSans(fontSize: 11, fontWeight: FontWeight.w700,
+                                color: Colors.white70, letterSpacing: 0.3)),
                       ]),
-                    ).animate().slideY(begin: 0.2, duration: 400.ms, delay: 350.ms).fadeIn(duration: 400.ms, delay: 350.ms),
-                  ],
+                      const SizedBox(height: 8),
+                      Text(_activitySuggestion,
+                          style: GoogleFonts.plusJakartaSans(fontSize: 14, fontWeight: FontWeight.w600,
+                              color: Colors.white, height: 1.4)),
+                    ]),
+                  ).animate().slideY(begin: 0.2, duration: 400.ms, delay: 350.ms).fadeIn(duration: 400.ms, delay: 350.ms),
 
                   const SizedBox(height: 28),
 
@@ -249,28 +282,38 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
                         await provider.confirmGoingToPlace();
                         await _openMaps(place.latitude, place.longitude, place.name);
                         if (mounted) setState(() => _goingConfirmed = true);
-                        if (mounted) Future.delayed(const Duration(seconds: 2), () {
-                          if (mounted) context.push('/feedback');
-                        });
+                        if (mounted) {
+                          Future.delayed(const Duration(seconds: 2), () {
+                            if (mounted) context.push('/feedback');
+                          });
+                        }
                       },
                       child: Container(
                         width: double.infinity, height: 60,
-                        decoration: BoxDecoration(gradient: AppTheme.accentGradient, borderRadius: BorderRadius.circular(18), boxShadow: AppTheme.accentShadow),
+                        decoration: BoxDecoration(
+                            gradient: AppTheme.accentGradient,
+                            borderRadius: BorderRadius.circular(18),
+                            boxShadow: AppTheme.accentShadow),
                         child: Center(child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                           const Icon(Icons.navigation_rounded, color: Colors.white, size: 22),
                           const SizedBox(width: 10),
-                          Text('Gidiyoruz!', style: GoogleFonts.outfit(fontSize: 18, fontWeight: FontWeight.w700, color: Colors.white)),
+                          Text('Gidiyoruz!',
+                              style: GoogleFonts.plusJakartaSans(fontSize: 18, fontWeight: FontWeight.w700, color: Colors.white)),
                         ])),
                       ),
                     ).animate().scale(duration: 400.ms, delay: 400.ms, curve: Curves.elasticOut)
                   else
                     Container(
                       width: double.infinity, height: 60,
-                      decoration: BoxDecoration(color: AppTheme.success.withValues(alpha: 0.1), borderRadius: BorderRadius.circular(18), border: Border.all(color: AppTheme.success.withValues(alpha: 0.4))),
+                      decoration: BoxDecoration(
+                          color: AppTheme.success.withValues(alpha: 0.1),
+                          borderRadius: BorderRadius.circular(18),
+                          border: Border.all(color: AppTheme.success.withValues(alpha: 0.4))),
                       child: Center(child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                         const Icon(Icons.check_circle_rounded, color: AppTheme.success, size: 22),
                         const SizedBox(width: 10),
-                        Text('Google Maps açıldı!', style: GoogleFonts.outfit(fontSize: 16, fontWeight: FontWeight.w600, color: AppTheme.success)),
+                        Text('Google Maps açıldı!',
+                            style: GoogleFonts.plusJakartaSans(fontSize: 16, fontWeight: FontWeight.w600, color: AppTheme.success)),
                       ])),
                     ),
 
@@ -284,11 +327,15 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
                     },
                     child: Container(
                       width: double.infinity, height: 52,
-                      decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(16), boxShadow: AppTheme.cardShadow),
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(16),
+                          boxShadow: AppTheme.cardShadow),
                       child: Center(child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                         const Icon(Icons.refresh_rounded, color: AppTheme.textSecondary, size: 18),
                         const SizedBox(width: 8),
-                        Text('Bir daha çevir', style: GoogleFonts.outfit(fontSize: 15, fontWeight: FontWeight.w600, color: AppTheme.textSecondary)),
+                        Text('Bir daha çevir',
+                            style: GoogleFonts.plusJakartaSans(fontSize: 15, fontWeight: FontWeight.w600, color: AppTheme.textSecondary)),
                       ])),
                     ),
                   ).animate().fadeIn(duration: 400.ms, delay: 500.ms),
@@ -308,7 +355,8 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           Icon(_catIcon(catData['id'] as String), color: Colors.white.withValues(alpha: 0.8), size: 80),
           const SizedBox(height: 8),
-          Text(catData['label'] as String, style: GoogleFonts.outfit(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.white60)),
+          Text(catData['label'] as String,
+              style: GoogleFonts.plusJakartaSans(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.white60)),
         ]),
       ),
     );
@@ -317,11 +365,14 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
   Widget _chip(IconData icon, String text, {Color? color}) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-      decoration: BoxDecoration(color: color != null ? color.withValues(alpha: 0.1) : Colors.white, borderRadius: BorderRadius.circular(20), boxShadow: color == null ? AppTheme.smallShadow : null),
+      decoration: BoxDecoration(
+          color: color != null ? color.withValues(alpha: 0.1) : Colors.white,
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: color == null ? AppTheme.smallShadow : null),
       child: Row(mainAxisSize: MainAxisSize.min, children: [
         Icon(icon, size: 13, color: color ?? AppTheme.textSecondary),
         const SizedBox(width: 4),
-        Text(text, style: GoogleFonts.outfit(fontSize: 12, fontWeight: FontWeight.w500, color: color ?? AppTheme.textSecondary)),
+        Text(text, style: GoogleFonts.plusJakartaSans(fontSize: 12, fontWeight: FontWeight.w500, color: color ?? AppTheme.textSecondary)),
       ]),
     );
   }
@@ -331,8 +382,11 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
       onTap: onTap,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 14),
-        decoration: BoxDecoration(gradient: AppTheme.accentGradient, borderRadius: BorderRadius.circular(14), boxShadow: AppTheme.accentShadow),
-        child: Text(text, style: GoogleFonts.outfit(color: Colors.white, fontWeight: FontWeight.w600)),
+        decoration: BoxDecoration(
+            gradient: AppTheme.accentGradient,
+            borderRadius: BorderRadius.circular(14),
+            boxShadow: AppTheme.accentShadow),
+        child: Text(text, style: GoogleFonts.plusJakartaSans(color: Colors.white, fontWeight: FontWeight.w600)),
       ),
     );
   }

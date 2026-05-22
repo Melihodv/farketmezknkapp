@@ -72,7 +72,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
 
         Text(
           'Nasıldı?',
-          style: GoogleFonts.outfit(
+          style: GoogleFonts.plusJakartaSans(
             fontSize: 32,
             fontWeight: FontWeight.w800,
             color: AppTheme.textPrimary,
@@ -84,7 +84,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
 
         Text(
           placeName,
-          style: GoogleFonts.outfit(
+          style: GoogleFonts.plusJakartaSans(
             fontSize: 16,
             color: AppTheme.textSecondary,
             fontWeight: FontWeight.w500,
@@ -122,10 +122,10 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
           const SizedBox(height: 20),
           TextField(
             controller: _noteController,
-            style: GoogleFonts.outfit(color: AppTheme.textPrimary),
+            style: GoogleFonts.plusJakartaSans(color: AppTheme.textPrimary),
             decoration: InputDecoration(
               hintText: 'Bir not ekle (opsiyonel)...',
-              hintStyle: GoogleFonts.outfit(color: AppTheme.textTertiary),
+              hintStyle: GoogleFonts.plusJakartaSans(color: AppTheme.textTertiary),
             ),
             maxLength: 100,
           ).animate().fadeIn(duration: 300.ms),
@@ -135,7 +135,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
             onTap: () => setState(() => _showNote = true),
             child: Text(
               '+ Not ekle',
-              style: GoogleFonts.outfit(
+              style: GoogleFonts.plusJakartaSans(
                 fontSize: 13,
                 color: AppTheme.textTertiary,
                 decoration: TextDecoration.underline,
@@ -168,7 +168,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
               child: Center(
                 child: Text(
                   'Gönder',
-                  style: GoogleFonts.outfit(
+                  style: GoogleFonts.plusJakartaSans(
                     fontSize: 16,
                     fontWeight: FontWeight.w700,
                     color: Colors.white,
@@ -184,7 +184,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
           onTap: _skip,
           child: Text(
             'Atla',
-            style: GoogleFonts.outfit(
+            style: GoogleFonts.plusJakartaSans(
               fontSize: 14,
               color: AppTheme.textTertiary,
             ),
@@ -223,7 +223,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
             const SizedBox(height: 8),
             Text(
               label,
-              style: GoogleFonts.outfit(
+              style: GoogleFonts.plusJakartaSans(
                 fontSize: 15,
                 fontWeight: FontWeight.w600,
                 color: selected ? color : AppTheme.textSecondary,
@@ -245,7 +245,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
         const SizedBox(height: 24),
         Text(
           'Teşekkürler!',
-          style: GoogleFonts.outfit(
+          style: GoogleFonts.plusJakartaSans(
             fontSize: 28,
             fontWeight: FontWeight.w800,
             color: AppTheme.textPrimary,
@@ -254,7 +254,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
         const SizedBox(height: 8),
         Text(
           'Sistem seni öğreniyor 🧠',
-          style: GoogleFonts.outfit(
+          style: GoogleFonts.plusJakartaSans(
             fontSize: 15,
             color: AppTheme.textSecondary,
           ),

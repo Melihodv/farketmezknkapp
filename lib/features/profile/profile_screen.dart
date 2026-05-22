@@ -51,7 +51,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           onTap: () => context.pop(),
           child: const Icon(Icons.arrow_back_ios_rounded, color: AppTheme.textPrimary, size: 20),
         ),
-        title: Text('Profil', style: GoogleFonts.outfit(fontSize: 18, fontWeight: FontWeight.w700, color: AppTheme.textPrimary)),
+        title: Text('Profil', style: GoogleFonts.plusJakartaSans(fontSize: 18, fontWeight: FontWeight.w700, color: AppTheme.textPrimary)),
         centerTitle: true,
       ),
       body: ListView(
@@ -89,7 +89,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 final u = await provider.signInWithGoogle();
                 if (u != null && mounted) {
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    content: Text('Hoş geldin ${u.displayName ?? ''}! 🎉', style: GoogleFonts.outfit(color: Colors.white)),
+                    content: Text('Hoş geldin ${u.displayName ?? ''}! 🎉', style: GoogleFonts.plusJakartaSans(color: Colors.white)),
                     backgroundColor: AppTheme.success,
                     behavior: SnackBarBehavior.floating,
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -97,14 +97,38 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 }
               },
             )
-          else
+          else ...[
             _buildSettingItem(Icons.logout_rounded, 'Çıkış Yap', 'Hesabından çık',
-              danger: true,
               onTap: () async {
                 await provider.signOut();
                 if (mounted) context.go('/');
               },
             ),
+            const SizedBox(height: 8),
+            _buildSettingItem(Icons.delete_forever_rounded, 'Hesabımı Sil', 'Tüm verilerini kalıcı olarak sil',
+              danger: true,
+              onTap: () async {
+                showDialog(
+                  context: context,
+                  builder: (ctx) => AlertDialog(
+                    title: Text('Emin misin?', style: GoogleFonts.plusJakartaSans(fontWeight: FontWeight.w700)),
+                    content: Text('Hesabın ve tüm geçmiş ziyaret verilerin kalıcı olarak silinecek. Bu işlem geri alınamaz.', style: GoogleFonts.plusJakartaSans()),
+                    actions: [
+                      TextButton(onPressed: () => Navigator.of(ctx).pop(), child: Text('İptal', style: GoogleFonts.plusJakartaSans(color: AppTheme.textSecondary))),
+                      TextButton(
+                        onPressed: () async {
+                          Navigator.of(ctx).pop();
+                          await provider.deleteAccount();
+                          if (mounted) context.go('/');
+                        },
+                        child: Text('Hesabı Sil', style: GoogleFonts.plusJakartaSans(color: AppTheme.error, fontWeight: FontWeight.w700)),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+          ],
 
           // ─── Legal ───────────────────────────────────────────
           _buildSectionHeader('Yasal'),
@@ -113,17 +137,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
               onTap: () => context.push('/privacy')),
           const SizedBox(height: 8),
           _buildSettingItem(Icons.gavel_rounded, 'Kullanım Koşulları', 'Uygulama şartları ve koşullar',
-              onTap: () => context.push('/privacy')),
+              onTap: () => context.push('/terms')),
 
           const SizedBox(height: 32),
 
           Center(
             child: Column(children: [
               Text('Farketmez Kanka v1.0.0',
-                  style: GoogleFonts.outfit(fontSize: 12, fontWeight: FontWeight.w600, color: AppTheme.textTertiary)),
+                  style: GoogleFonts.plusJakartaSans(fontSize: 12, fontWeight: FontWeight.w600, color: AppTheme.textTertiary)),
               const SizedBox(height: 4),
               Text('© 2026 Ottovate. Tüm hakları saklıdır.',
-                  style: GoogleFonts.outfit(fontSize: 11, color: AppTheme.textTertiary)),
+                  style: GoogleFonts.plusJakartaSans(fontSize: 11, color: AppTheme.textTertiary)),
             ]),
           ),
         ],
@@ -149,14 +173,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
           Container(
             width: 64, height: 64,
             decoration: BoxDecoration(gradient: AppTheme.accentGradient, shape: BoxShape.circle),
-            child: Center(child: Text(initials, style: GoogleFonts.outfit(fontSize: 26, fontWeight: FontWeight.w700, color: Colors.white))),
+            child: Center(child: Text(initials, style: GoogleFonts.plusJakartaSans(fontSize: 26, fontWeight: FontWeight.w700, color: Colors.white))),
           ),
           const SizedBox(width: 16),
           Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text(displayName, style: GoogleFonts.outfit(fontSize: 18, fontWeight: FontWeight.w700, color: AppTheme.textPrimary)),
+            Text(displayName, style: GoogleFonts.plusJakartaSans(fontSize: 18, fontWeight: FontWeight.w700, color: AppTheme.textPrimary)),
             if (email.isNotEmpty) ...[
               const SizedBox(height: 2),
-              Text(email, style: GoogleFonts.outfit(fontSize: 12, color: AppTheme.textSecondary)),
+              Text(email, style: GoogleFonts.plusJakartaSans(fontSize: 12, color: AppTheme.textSecondary)),
             ],
             const SizedBox(height: 6),
             Container(
@@ -167,7 +191,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               child: Text(
                 isGuest ? 'Misafir Modu' : 'Google Hesabı',
-                style: GoogleFonts.outfit(fontSize: 10, fontWeight: FontWeight.w600, color: isGuest ? AppTheme.textTertiary : AppTheme.accent),
+                style: GoogleFonts.plusJakartaSans(fontSize: 10, fontWeight: FontWeight.w600, color: isGuest ? AppTheme.textTertiary : AppTheme.accent),
               ),
             ),
           ])),
@@ -189,11 +213,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            Text('İstatistikler', style: GoogleFonts.outfit(fontSize: 13, fontWeight: FontWeight.w600, color: AppTheme.textTertiary, letterSpacing: 0.4)),
+            Text('İstatistikler', style: GoogleFonts.plusJakartaSans(fontSize: 13, fontWeight: FontWeight.w600, color: AppTheme.textTertiary, letterSpacing: 0.4)),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
               decoration: BoxDecoration(color: AppTheme.accentGlow, borderRadius: BorderRadius.circular(20)),
-              child: Text(level, style: GoogleFonts.outfit(fontSize: 11, fontWeight: FontWeight.w700, color: AppTheme.accent)),
+              child: Text(level, style: GoogleFonts.plusJakartaSans(fontSize: 11, fontWeight: FontWeight.w700, color: AppTheme.accent)),
             ),
           ]),
           const SizedBox(height: 16),
@@ -221,15 +245,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
         child: Column(children: [
           Icon(icon, color: AppTheme.accent, size: 20),
           const SizedBox(height: 6),
-          Text(value, style: GoogleFonts.outfit(fontSize: 20, fontWeight: FontWeight.w800, color: AppTheme.textPrimary)),
-          Text(label, style: GoogleFonts.outfit(fontSize: 10, color: AppTheme.textTertiary)),
+          Text(value, style: GoogleFonts.plusJakartaSans(fontSize: 20, fontWeight: FontWeight.w800, color: AppTheme.textPrimary)),
+          Text(label, style: GoogleFonts.plusJakartaSans(fontSize: 10, color: AppTheme.textTertiary)),
         ]),
       ),
     );
   }
 
   Widget _buildSectionHeader(String title) {
-    return Text(title, style: GoogleFonts.outfit(fontSize: 12, fontWeight: FontWeight.w600, color: AppTheme.textTertiary, letterSpacing: 0.5));
+    return Text(title, style: GoogleFonts.plusJakartaSans(fontSize: 12, fontWeight: FontWeight.w600, color: AppTheme.textTertiary, letterSpacing: 0.5));
   }
 
   Widget _buildSettingItem(IconData icon, String title, String subtitle, {VoidCallback? onTap, bool danger = false, bool accent = false}) {
@@ -253,8 +277,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
           const SizedBox(width: 12),
           Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text(title, style: GoogleFonts.outfit(fontSize: 14, fontWeight: FontWeight.w600, color: danger ? AppTheme.error : accent ? AppTheme.accent : AppTheme.textPrimary)),
-            Text(subtitle, style: GoogleFonts.outfit(fontSize: 11, color: AppTheme.textTertiary)),
+            Text(title, style: GoogleFonts.plusJakartaSans(fontSize: 14, fontWeight: FontWeight.w600, color: danger ? AppTheme.error : accent ? AppTheme.accent : AppTheme.textPrimary)),
+            Text(subtitle, style: GoogleFonts.plusJakartaSans(fontSize: 11, color: AppTheme.textTertiary)),
           ])),
           if (onTap != null)
             Icon(Icons.chevron_right_rounded, color: danger ? AppTheme.error.withValues(alpha: 0.5) : AppTheme.textTertiary, size: 20),

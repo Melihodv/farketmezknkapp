@@ -234,6 +234,15 @@ class AppProvider extends ChangeNotifier {
     } catch (_) { return null; }
   }
 
+  Future<UserModel?> signInWithApple() async {
+    try {
+      final user = await _authService.signInWithApple();
+      _currentUser = user;
+      notifyListeners();
+      return user;
+    } catch (_) { return null; }
+  }
+
   Future<UserModel?> signInAsGuest() async {
     try {
       final user = await _authService.signInAsGuest();
@@ -245,6 +254,12 @@ class AppProvider extends ChangeNotifier {
 
   Future<void> signOut() async {
     try { await _authService.signOut(); } catch (_) {}
+    _currentUser = null;
+    notifyListeners();
+  }
+
+  Future<void> deleteAccount() async {
+    try { await _authService.deleteAccount(); } catch (_) {}
     _currentUser = null;
     notifyListeners();
   }

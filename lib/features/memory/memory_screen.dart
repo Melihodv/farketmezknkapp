@@ -43,7 +43,7 @@ class _MemoryScreenState extends State<MemoryScreen> {
         ),
         title: Text(
           'Hafıza',
-          style: GoogleFonts.outfit(
+          style: GoogleFonts.plusJakartaSans(
             fontSize: 20,
             fontWeight: FontWeight.w700,
             color: AppTheme.textPrimary,
@@ -71,7 +71,7 @@ class _MemoryScreenState extends State<MemoryScreen> {
                   const SizedBox(width: 5),
                   Text(
                     _isListView ? 'Harita' : 'Liste',
-                    style: GoogleFonts.outfit(
+                    style: GoogleFonts.plusJakartaSans(
                       fontSize: 12,
                       color: AppTheme.accent,
                       fontWeight: FontWeight.w600,
@@ -203,7 +203,7 @@ class _MemoryScreenState extends State<MemoryScreen> {
         const SizedBox(height: 4),
         Text(
           value,
-          style: GoogleFonts.outfit(
+          style: GoogleFonts.plusJakartaSans(
             fontSize: 22,
             fontWeight: FontWeight.w800,
             color: AppTheme.textPrimary,
@@ -211,7 +211,7 @@ class _MemoryScreenState extends State<MemoryScreen> {
         ),
         Text(
           label,
-          style: GoogleFonts.outfit(
+          style: GoogleFonts.plusJakartaSans(
             fontSize: 11,
             color: AppTheme.textTertiary,
           ),
@@ -270,7 +270,7 @@ class _MemoryScreenState extends State<MemoryScreen> {
                   const SizedBox(width: 6),
                   Text(
                     filter['label'] as String,
-                    style: GoogleFonts.outfit(
+                    style: GoogleFonts.plusJakartaSans(
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
                       color: isActive ? Colors.white : AppTheme.textSecondary,
@@ -327,7 +327,7 @@ class _MemoryScreenState extends State<MemoryScreen> {
                           Expanded(
                             child: Text(
                               visit.placeName,
-                              style: GoogleFonts.outfit(
+                              style: GoogleFonts.plusJakartaSans(
                                 fontSize: 15,
                                 fontWeight: FontWeight.w700,
                                 color: isBlocked
@@ -345,7 +345,7 @@ class _MemoryScreenState extends State<MemoryScreen> {
                               ),
                               child: Text(
                                 '🚫 Engellendi',
-                                style: GoogleFonts.outfit(
+                                style: GoogleFonts.plusJakartaSans(
                                   fontSize: 10,
                                   color: AppTheme.error,
                                   fontWeight: FontWeight.w600,
@@ -357,7 +357,7 @@ class _MemoryScreenState extends State<MemoryScreen> {
                       const SizedBox(height: 4),
                       Text(
                         '${visit.visitCount} kez ziyaret',
-                        style: GoogleFonts.outfit(
+                        style: GoogleFonts.plusJakartaSans(
                           fontSize: 12,
                           color: AppTheme.textTertiary,
                         ),
@@ -389,7 +389,7 @@ class _MemoryScreenState extends State<MemoryScreen> {
                         SnackBar(
                           content: Text(
                             '${visit.placeName} tekrar öneri havuzuna eklendi!',
-                            style: GoogleFonts.outfit(),
+                            style: GoogleFonts.plusJakartaSans(),
                           ),
                           backgroundColor: AppTheme.accent,
                           behavior: SnackBarBehavior.floating,
@@ -406,7 +406,7 @@ class _MemoryScreenState extends State<MemoryScreen> {
                     ),
                     child: Text(
                       '🔄 Tekrar öner',
-                      style: GoogleFonts.outfit(
+                      style: GoogleFonts.plusJakartaSans(
                         fontSize: 11,
                         color: AppTheme.accent,
                         fontWeight: FontWeight.w600,
@@ -432,7 +432,7 @@ class _MemoryScreenState extends State<MemoryScreen> {
       ),
       child: Text(
         label,
-        style: GoogleFonts.outfit(
+        style: GoogleFonts.plusJakartaSans(
           fontSize: 12,
           color: color,
           fontWeight: FontWeight.w600,
@@ -452,9 +452,9 @@ class _MemoryScreenState extends State<MemoryScreen> {
             child: const Icon(Icons.map_rounded, color: AppTheme.accent, size: 40),
           ),
           const SizedBox(height: 20),
-          Text('Henüz gidilen yer yok', style: GoogleFonts.outfit(fontSize: 18, fontWeight: FontWeight.w600, color: AppTheme.textPrimary)),
+          Text('Henüz gidilen yer yok', style: GoogleFonts.plusJakartaSans(fontSize: 18, fontWeight: FontWeight.w600, color: AppTheme.textPrimary)),
           const SizedBox(height: 8),
-          Text('Farketmez\'e sor ve yeni yerler keşfet!', style: GoogleFonts.outfit(fontSize: 14, color: AppTheme.textSecondary)),
+          Text('Farketmez\'e sor ve yeni yerler keşfet!', style: GoogleFonts.plusJakartaSans(fontSize: 14, color: AppTheme.textSecondary)),
         ],
       ),
     );

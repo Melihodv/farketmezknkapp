@@ -1,5 +1,6 @@
 import 'dart:convert';
-import 'dart:math';
+import 'dart:math' as math;
+
 import 'package:http/http.dart' as http;
 import 'package:geolocator/geolocator.dart';
 import '../constants/app_constants.dart';
@@ -72,14 +73,24 @@ class PlacesService {
       }
     }
 
-    // Aile için: çok düşük puanlı veya bar/nightclub çıkar
-    if (groupType?['id'] == 'family') {
+    // Grup tipine göre type bazlı filtre (excludeTypes)
+    final excludeTypes = (groupType?['excludeTypes'] as List<dynamic>?)?.cast<String>() ?? <String>[];
+    if (excludeTypes.isNotEmpty) {
       allPlaces = allPlaces.where((p) =>
-        !p.types.contains('bar') &&
-        !p.types.contains('night_club') &&
-        !p.types.contains('casino')
+        !p.types.any((t) => excludeTypes.contains(t))
       ).toList();
     }
+
+    // ── Strict radius filter (Haversine + yol düzeltme katsayısı) ──
+    // Haversine düz hat mesafesi verir; şehir içi yol mesafesi ~1.45x daha uzun.
+    // 0.68 katsayısıyla filtreleriz → Maps'te gösterilen mesafe seçilen değere yakın çıkar.
+    const roadCorrectionFactor = 0.68;
+    allPlaces = allPlaces.where((p) {
+      final dist = _haversineMeters(
+        latitude, longitude, p.latitude, p.longitude,
+      );
+      return dist <= radius * roadCorrectionFactor;
+    }).toList();
 
     // Duplicate'leri temizle
     final seen = <String>{};
@@ -87,6 +98,23 @@ class PlacesService {
 
     return allPlaces;
   }
+
+  /// Haversine mesafesi (metre)
+  double _haversineMeters(
+    double lat1, double lon1, double lat2, double lon2,
+  ) {
+    const r = 6371000.0; // Earth radius in metres
+    final dLat = _toRad(lat2 - lat1);
+    final dLon = _toRad(lon2 - lon1);
+    final a = math.sin(dLat / 2) * math.sin(dLat / 2) +
+        math.cos(_toRad(lat1)) *
+            math.cos(_toRad(lat2)) *
+            math.sin(dLon / 2) *
+            math.sin(dLon / 2);
+    return r * 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a));
+  }
+
+  double _toRad(double deg) => deg * math.pi / 180;
 
   /// Puanlı öneri seçimi (sponsored önce)
   PlaceModel? selectSmartRecommendation(
@@ -96,14 +124,14 @@ class PlacesService {
     if (places.isEmpty) return null;
 
     // %20 ihtimalle sponsored göster
-    if (sponsoredPlaces.isNotEmpty && Random().nextDouble() < 0.20) {
+    if (sponsoredPlaces.isNotEmpty && math.Random().nextDouble() < 0.20) {
       sponsoredPlaces.shuffle();
       return sponsoredPlaces.first;
     }
 
     // Rating'e göre ağırlıklı rastgele seçim
     final sorted = [...places]..sort((a, b) => b.rating.compareTo(a.rating));
-    final topPlaces = sorted.take(min(10, sorted.length)).toList();
+    final topPlaces = sorted.take(math.min(10, sorted.length)).toList();
     topPlaces.shuffle();
     return topPlaces.first;
   }

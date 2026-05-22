@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../constants/app_constants.dart';
 import '../models/user_model.dart';
@@ -15,6 +16,8 @@ class AuthService {
   /// Google ile giriş (Android/iOS)
   Future<UserModel?> signInWithGoogle() async {
     try {
+      // Önceki oturumu temizle — hesap seçiciyi her zaman göster
+      await _googleSignIn.signOut();
       final googleUser = await _googleSignIn.signIn();
       if (googleUser == null) return null;
 
@@ -26,12 +29,68 @@ class AuthService {
 
       final userCredential = await _auth.signInWithCredential(credential);
       final user = userCredential.user!;
-      return await _createOrUpdateUser(
+
+      // Firestore kaydını dene; başarısız olsa bile Firebase user var
+      final userModel = await _createOrUpdateUser(
         uid: user.uid,
         displayName: user.displayName,
         email: user.email,
         photoUrl: user.photoURL,
         isGuest: false,
+      );
+
+      // Firestore başarısız olsa da Firebase girişi tamamlandı
+      return userModel ?? UserModel(
+        uid: user.uid,
+        displayName: user.displayName,
+        email: user.email,
+        photoUrl: user.photoURL,
+        isGuest: false,
+        createdAt: DateTime.now(),
+      );
+    } catch (e) {
+      return null;
+    }
+  }
+
+  /// Apple ile giriş (iOS/Android)
+  Future<UserModel?> signInWithApple() async {
+    try {
+      final appleCredential = await SignInWithApple.getAppleIDCredential(
+        scopes: [
+          AppleIDAuthorizationScopes.email,
+          AppleIDAuthorizationScopes.fullName,
+        ],
+      );
+
+      final oauthCredential = OAuthProvider('apple.com').credential(
+        idToken: appleCredential.identityToken,
+        accessToken: appleCredential.authorizationCode,
+      );
+
+      final userCredential = await _auth.signInWithCredential(oauthCredential);
+      final user = userCredential.user!;
+
+      String? displayName = user.displayName;
+      if (appleCredential.givenName != null || appleCredential.familyName != null) {
+        displayName = '${appleCredential.givenName ?? ''} ${appleCredential.familyName ?? ''}'.trim();
+      }
+
+      final userModel = await _createOrUpdateUser(
+        uid: user.uid,
+        displayName: displayName ?? 'Kullanıcı',
+        email: user.email,
+        photoUrl: user.photoURL,
+        isGuest: false,
+      );
+
+      return userModel ?? UserModel(
+        uid: user.uid,
+        displayName: displayName ?? 'Kullanıcı',
+        email: user.email,
+        photoUrl: user.photoURL,
+        isGuest: false,
+        createdAt: DateTime.now(),
       );
     } catch (e) {
       return null;
@@ -86,6 +145,21 @@ class AuthService {
       await _googleSignIn.signOut();
       await _auth.signOut();
     } catch (_) {}
+  }
+
+  Future<void> deleteAccount() async {
+    try {
+      final user = _auth.currentUser;
+      if (user != null) {
+        // Remove from Firestore
+        await _firestore.collection(AppConstants.usersCollection).doc(user.uid).delete();
+        // Disconnect & Delete from Auth providers
+        await _googleSignIn.disconnect().catchError((_) {});
+        await user.delete();
+      }
+    } catch (e) {
+      // Re-authentication might be required, but we try our best.
+    }
   }
 
   Future<UserModel?> loadUser() async {
