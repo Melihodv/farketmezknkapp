@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 class AppTheme {
   // ──────────────────────────────────────────────────────────
   // "Aurora Light" — Açık, Premium, Genç Nesle Özel
-  // Violet × Pink imza paleti | Plus Jakarta Sans font
+  // Violet × Pink imza paleti | Outfit font
   // ──────────────────────────────────────────────────────────
 
   // Backgrounds
@@ -90,20 +90,20 @@ class AppTheme {
         onSecondary: Colors.white,
         onSurface: textPrimary,
       ),
-      textTheme: GoogleFonts.plusJakartaSansTextTheme().copyWith(
-        displayLarge:  GoogleFonts.plusJakartaSans(fontSize: 32, fontWeight: FontWeight.w800, color: textPrimary, letterSpacing: -1.0),
-        displayMedium: GoogleFonts.plusJakartaSans(fontSize: 26, fontWeight: FontWeight.w700, color: textPrimary, letterSpacing: -0.6),
-        titleLarge:    GoogleFonts.plusJakartaSans(fontSize: 20, fontWeight: FontWeight.w700, color: textPrimary),
-        titleMedium:   GoogleFonts.plusJakartaSans(fontSize: 16, fontWeight: FontWeight.w600, color: textPrimary),
-        bodyLarge:     GoogleFonts.plusJakartaSans(fontSize: 15, fontWeight: FontWeight.w400, color: textSecondary),
-        bodyMedium:    GoogleFonts.plusJakartaSans(fontSize: 13, fontWeight: FontWeight.w400, color: textSecondary),
-        labelLarge:    GoogleFonts.plusJakartaSans(fontSize: 13, fontWeight: FontWeight.w600, color: textPrimary),
+      textTheme: GoogleFonts.outfitTextTheme().copyWith(
+        displayLarge:  GoogleFonts.outfit(fontSize: 32, fontWeight: FontWeight.w800, color: textPrimary, letterSpacing: -1.0),
+        displayMedium: GoogleFonts.outfit(fontSize: 26, fontWeight: FontWeight.w700, color: textPrimary, letterSpacing: -0.6),
+        titleLarge:    GoogleFonts.outfit(fontSize: 20, fontWeight: FontWeight.w700, color: textPrimary),
+        titleMedium:   GoogleFonts.outfit(fontSize: 16, fontWeight: FontWeight.w600, color: textPrimary),
+        bodyLarge:     GoogleFonts.outfit(fontSize: 15, fontWeight: FontWeight.w400, color: textSecondary),
+        bodyMedium:    GoogleFonts.outfit(fontSize: 13, fontWeight: FontWeight.w400, color: textSecondary),
+        labelLarge:    GoogleFonts.outfit(fontSize: 13, fontWeight: FontWeight.w600, color: textPrimary),
       ),
       appBarTheme: AppBarTheme(
         backgroundColor: background,
         elevation: 0,
         surfaceTintColor: Colors.transparent,
-        titleTextStyle: GoogleFonts.plusJakartaSans(fontSize: 18, fontWeight: FontWeight.w700, color: textPrimary),
+        titleTextStyle: GoogleFonts.outfit(fontSize: 18, fontWeight: FontWeight.w700, color: textPrimary),
         iconTheme: const IconThemeData(color: textPrimary),
         systemOverlayStyle: const SystemUiOverlayStyle(
           statusBarColor: Colors.transparent,
@@ -121,7 +121,7 @@ class AppTheme {
       ),
       snackBarTheme: SnackBarThemeData(
         backgroundColor: textPrimary,
-        contentTextStyle: GoogleFonts.plusJakartaSans(color: Colors.white),
+        contentTextStyle: GoogleFonts.outfit(color: Colors.white),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
         behavior: SnackBarBehavior.floating,
       ),

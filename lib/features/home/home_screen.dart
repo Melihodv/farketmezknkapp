@@ -129,14 +129,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     gradient: AppTheme.accentGradient,
                     borderRadius: BorderRadius.circular(30),
                   ),
-                  child: Text('Uygulama Rehberi', style: GoogleFonts.plusJakartaSans(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white, letterSpacing: 0.5)),
+                  child: Text('Uygulama Rehberi', style: GoogleFonts.outfit(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white, letterSpacing: 0.5)),
                 ).animate().fadeIn(duration: 400.ms),
                 const SizedBox(height: 12),
                 Text('Nasıl kullanılır?',
-                    style: GoogleFonts.plusJakartaSans(fontSize: 26, fontWeight: FontWeight.w800, color: Colors.white, letterSpacing: -0.5)
+                    style: GoogleFonts.outfit(fontSize: 26, fontWeight: FontWeight.w800, color: Colors.white, letterSpacing: -0.5)
                 ).animate().slideY(begin: -0.2, duration: 400.ms, delay: 100.ms).fadeIn(duration: 400.ms, delay: 100.ms),
                 const SizedBox(height: 6),
-                Text('Her şey bu ekrandan başlıyor', style: GoogleFonts.plusJakartaSans(fontSize: 13, color: Colors.white60)
+                Text('Her şey bu ekrandan başlıyor', style: GoogleFonts.outfit(fontSize: 13, color: Colors.white60)
                 ).animate().fadeIn(duration: 400.ms, delay: 200.ms),
                 const SizedBox(height: 24),
 
@@ -161,9 +161,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Column(crossAxisAlignment: CrossAxisAlignment.start, mainAxisAlignment: MainAxisAlignment.center, children: [
                         Icon(s['icon'] as IconData, color: AppTheme.accentLight, size: 20),
                         const SizedBox(height: 6),
-                        Text(s['title'] as String, style: GoogleFonts.plusJakartaSans(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white)),
+                        Text(s['title'] as String, style: GoogleFonts.outfit(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.white)),
                         const SizedBox(height: 2),
-                        Text(s['desc'] as String, style: GoogleFonts.plusJakartaSans(fontSize: 10, color: Colors.white54, height: 1.3), maxLines: 2),
+                        Text(s['desc'] as String, style: GoogleFonts.outfit(fontSize: 10, color: Colors.white54, height: 1.3), maxLines: 2),
                       ]),
                     ).animate().scale(duration: 350.ms, delay: Duration(milliseconds: 200 + i * 60), curve: Curves.easeOutBack);
                   },
@@ -179,7 +179,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       borderRadius: BorderRadius.circular(30),
                       boxShadow: AppTheme.accentShadow,
                     ),
-                    child: Text('Anladım, başlayalım! 🚀', style: GoogleFonts.plusJakartaSans(fontSize: 14, fontWeight: FontWeight.w700, color: Colors.white)),
+                    child: Text('Anladım, başlayalım!', style: GoogleFonts.outfit(fontSize: 14, fontWeight: FontWeight.w700, color: Colors.white)),
                   ),
                 ).animate().fadeIn(duration: 400.ms, delay: 700.ms),
               ],
@@ -201,9 +201,9 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(_getGreeting(), style: GoogleFonts.plusJakartaSans(fontSize: 13, color: AppTheme.textTertiary)),
+                Text(_getGreeting(), style: GoogleFonts.outfit(fontSize: 13, color: AppTheme.textTertiary)),
                 const SizedBox(height: 1),
-                Text('Ne yapalım?', style: GoogleFonts.plusJakartaSans(fontSize: 26, fontWeight: FontWeight.w800, color: AppTheme.textPrimary, letterSpacing: -0.8)),
+                Text('Ne yapalım?', style: GoogleFonts.outfit(fontSize: 26, fontWeight: FontWeight.w800, color: AppTheme.textPrimary, letterSpacing: -0.8)),
               ],
             ),
           ),
@@ -215,7 +215,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Row(mainAxisSize: MainAxisSize.min, children: [
                 const Icon(Icons.location_on_rounded, color: AppTheme.accent, size: 13),
                 const SizedBox(width: 4),
-                Text(_shortAddr(provider.currentAddress), style: GoogleFonts.plusJakartaSans(fontSize: 12, color: AppTheme.textSecondary, fontWeight: FontWeight.w500)),
+                Text(_shortAddr(provider.currentAddress), style: GoogleFonts.outfit(fontSize: 12, color: AppTheme.textSecondary, fontWeight: FontWeight.w500)),
               ]),
             ),
           ),
@@ -225,7 +225,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Container(
               width: 36, height: 36,
               decoration: BoxDecoration(gradient: AppTheme.accentGradient, shape: BoxShape.circle, boxShadow: AppTheme.accentShadow),
-              child: Center(child: Text(_initials(provider.currentUser), style: GoogleFonts.plusJakartaSans(fontSize: 13, fontWeight: FontWeight.w700, color: Colors.white))),
+              child: Center(child: Text(_initials(provider.currentUser), style: GoogleFonts.outfit(fontSize: 13, fontWeight: FontWeight.w700, color: Colors.white))),
             ),
           ),
         ],
@@ -244,7 +244,7 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Kategori', style: GoogleFonts.plusJakartaSans(fontSize: 12, fontWeight: FontWeight.w700, color: AppTheme.textTertiary, letterSpacing: 0.6)),
+              Text('Kategori', style: GoogleFonts.outfit(fontSize: 12, fontWeight: FontWeight.w700, color: AppTheme.textTertiary, letterSpacing: 0.6)),
               GestureDetector(
                 onTap: () => _openFilter(context),
                 child: Container(
@@ -253,7 +253,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Row(children: [
                     const Icon(Icons.tune_rounded, color: Colors.white, size: 12),
                     const SizedBox(width: 4),
-                    Text('Tercihler', style: GoogleFonts.plusJakartaSans(fontSize: 11, color: Colors.white, fontWeight: FontWeight.w600)),
+                    Text('Tercihler', style: GoogleFonts.outfit(fontSize: 11, color: Colors.white, fontWeight: FontWeight.w600)),
                   ]),
                 ),
               ),
@@ -286,7 +286,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
                     Icon(_catIcon(cat['id']), color: sel ? Colors.white : AppTheme.textTertiary, size: 24),
                     const SizedBox(height: 6),
-                    Text(cat['label'], style: GoogleFonts.plusJakartaSans(fontSize: 11, fontWeight: FontWeight.w600, color: sel ? Colors.white : AppTheme.textSecondary), textAlign: TextAlign.center),
+                    Text(cat['label'], style: GoogleFonts.outfit(fontSize: 11, fontWeight: FontWeight.w600, color: sel ? Colors.white : AppTheme.textSecondary), textAlign: TextAlign.center),
                   ]),
                 ),
               ).animate().slideX(begin: 0.3, duration: 300.ms, delay: Duration(milliseconds: i * 50)).fadeIn(duration: 300.ms, delay: Duration(milliseconds: i * 50));
@@ -311,7 +311,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Row(children: [
               const Icon(Icons.people_alt_rounded, color: AppTheme.accent, size: 13),
               const SizedBox(width: 4),
-              Text('Kimlerle çıkıyorsun?', style: GoogleFonts.plusJakartaSans(fontSize: 11, fontWeight: FontWeight.w700, color: AppTheme.textTertiary)),
+              Text('Kimlerle çıkıyorsun?', style: GoogleFonts.outfit(fontSize: 11, fontWeight: FontWeight.w700, color: AppTheme.textTertiary)),
             ]),
             const SizedBox(height: 12),
             Row(
@@ -335,7 +335,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Icon(_groupIcon(g['id'] as String), color: sel ? Colors.white : AppTheme.textTertiary, size: 20),
                         const SizedBox(height: 4),
                         Text(g['label'] as String,
-                            style: GoogleFonts.plusJakartaSans(fontSize: 10, fontWeight: FontWeight.w700, color: sel ? Colors.white : AppTheme.textTertiary),
+                            style: GoogleFonts.outfit(fontSize: 10, fontWeight: FontWeight.w700, color: sel ? Colors.white : AppTheme.textTertiary),
                             textAlign: TextAlign.center,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis),
@@ -365,7 +365,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Row(children: [
               const Icon(Icons.radar_rounded, color: AppTheme.accent, size: 13),
               const SizedBox(width: 4),
-              Text('Ne kadar uzağa?', style: GoogleFonts.plusJakartaSans(fontSize: 11, fontWeight: FontWeight.w700, color: AppTheme.textTertiary)),
+              Text('Ne kadar uzağa?', style: GoogleFonts.outfit(fontSize: 11, fontWeight: FontWeight.w700, color: AppTheme.textTertiary)),
             ]),
             const SizedBox(height: 12),
             Row(
@@ -385,7 +385,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         boxShadow: sel ? AppTheme.accentShadow : null,
                       ),
                       child: Center(child: Text(AppConstants.radiusLabels[i],
-                          style: GoogleFonts.plusJakartaSans(fontSize: 12, fontWeight: FontWeight.w700, color: sel ? Colors.white : AppTheme.textTertiary))),
+                          style: GoogleFonts.outfit(fontSize: 12, fontWeight: FontWeight.w700, color: sel ? Colors.white : AppTheme.textTertiary))),
                     ),
                   ),
                 );
@@ -409,10 +409,10 @@ class _HomeScreenState extends State<HomeScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            Text('Son Ziyaretler', style: GoogleFonts.plusJakartaSans(fontSize: 12, fontWeight: FontWeight.w700, color: AppTheme.textTertiary, letterSpacing: 0.4)),
+            Text('Son Ziyaretler', style: GoogleFonts.outfit(fontSize: 12, fontWeight: FontWeight.w700, color: AppTheme.textTertiary, letterSpacing: 0.4)),
             GestureDetector(
               onTap: () => context.push('/memory'),
-              child: Text('Tümü →', style: GoogleFonts.plusJakartaSans(fontSize: 12, color: AppTheme.accent, fontWeight: FontWeight.w600)),
+              child: Text('Tümü →', style: GoogleFonts.outfit(fontSize: 12, color: AppTheme.accent, fontWeight: FontWeight.w600)),
             ),
           ]),
           const SizedBox(height: 10),
@@ -430,10 +430,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 const SizedBox(width: 12),
                 Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  Text(v.placeName, style: GoogleFonts.plusJakartaSans(fontSize: 13, fontWeight: FontWeight.w600, color: AppTheme.textPrimary), maxLines: 1, overflow: TextOverflow.ellipsis),
-                  Text('${v.visitCount}x ziyaret', style: GoogleFonts.plusJakartaSans(fontSize: 11, color: AppTheme.textTertiary)),
+                  Text(v.placeName, style: GoogleFonts.outfit(fontSize: 13, fontWeight: FontWeight.w600, color: AppTheme.textPrimary), maxLines: 1, overflow: TextOverflow.ellipsis),
+                  Text('${v.visitCount}x ziyaret', style: GoogleFonts.outfit(fontSize: 11, color: AppTheme.textTertiary)),
                 ])),
-                if (v.positiveCount > 0) Text('👍 ${v.positiveCount}', style: GoogleFonts.plusJakartaSans(fontSize: 11, color: AppTheme.textTertiary)),
+                if (v.positiveCount > 0) Text('👍 ${v.positiveCount}', style: GoogleFonts.outfit(fontSize: 11, color: AppTheme.textTertiary)),
               ]),
             );
           }),
@@ -480,10 +480,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       const SizedBox(height: 16),
                       Text('Yakında Mekan Yok',
-                          style: GoogleFonts.plusJakartaSans(fontSize: 18, fontWeight: FontWeight.w700, color: AppTheme.textPrimary)),
+                          style: GoogleFonts.outfit(fontSize: 18, fontWeight: FontWeight.w700, color: AppTheme.textPrimary)),
                       const SizedBox(height: 8),
                       Text('Seçtiğin mesafede uygun mekan bulunamadı.\nMesafeyi artır veya farklı kategori dene!',
-                          style: GoogleFonts.plusJakartaSans(fontSize: 13, color: AppTheme.textSecondary),
+                          style: GoogleFonts.outfit(fontSize: 13, color: AppTheme.textSecondary),
                           textAlign: TextAlign.center),
                       const SizedBox(height: 24),
                       GestureDetector(
@@ -497,7 +497,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             boxShadow: AppTheme.accentShadow,
                           ),
                           child: Center(child: Text('Tamam',
-                              style: GoogleFonts.plusJakartaSans(fontSize: 14, fontWeight: FontWeight.w700, color: Colors.white))),
+                              style: GoogleFonts.outfit(fontSize: 14, fontWeight: FontWeight.w700, color: Colors.white))),
                         ),
                       ),
                     ]),
@@ -521,12 +521,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 ? Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                     const SizedBox(width: 20, height: 20, child: CircularProgressIndicator(color: AppTheme.accent, strokeWidth: 2)),
                     const SizedBox(width: 12),
-                    Text('Aranıyor...', style: GoogleFonts.plusJakartaSans(fontSize: 16, fontWeight: FontWeight.w600, color: AppTheme.textSecondary)),
+                    Text('Aranıyor...', style: GoogleFonts.outfit(fontSize: 16, fontWeight: FontWeight.w600, color: AppTheme.textSecondary)),
                   ])
                 : Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                     const Icon(Icons.bolt_rounded, color: Colors.white, size: 26),
                     const SizedBox(width: 8),
-                    Text('FARKETMEZ', style: GoogleFonts.plusJakartaSans(fontSize: 20, fontWeight: FontWeight.w800, color: Colors.white, letterSpacing: 2.5)),
+                    Text('FARKETMEZ', style: GoogleFonts.outfit(fontSize: 20, fontWeight: FontWeight.w800, color: Colors.white, letterSpacing: 2.5)),
                   ]),
           ),
         ),
@@ -574,12 +574,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text('Nereden Bulurum?',
-                        style: GoogleFonts.plusJakartaSans(
+                        style: GoogleFonts.outfit(
                             fontSize: 15, fontWeight: FontWeight.w800,
                             color: Colors.white, letterSpacing: -0.2)),
                     const SizedBox(height: 2),
                     Text('Bulamadığın her şeyi bul.',
-                        style: GoogleFonts.plusJakartaSans(
+                        style: GoogleFonts.outfit(
                             fontSize: 11.5,
                             color: Colors.white.withValues(alpha: 0.6))),
                   ],
@@ -593,7 +593,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   boxShadow: AppTheme.accentShadow,
                 ),
                 child: Text('Ara',
-                    style: GoogleFonts.plusJakartaSans(
+                    style: GoogleFonts.outfit(
                         fontSize: 12, fontWeight: FontWeight.w700,
                         color: Colors.white)),
               ),
@@ -637,12 +637,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text('Kararsız mı kaldın?',
-                        style: GoogleFonts.plusJakartaSans(
+                        style: GoogleFonts.outfit(
                             fontSize: 15, fontWeight: FontWeight.w800,
                             color: Colors.white, letterSpacing: -0.2)),
                     const SizedBox(height: 2),
                     Text('Kendi çarkını oluştur ve çevir!',
-                        style: GoogleFonts.plusJakartaSans(
+                        style: GoogleFonts.outfit(
                             fontSize: 11.5,
                             color: Colors.white.withValues(alpha: 0.8))),
                   ],
@@ -656,7 +656,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   boxShadow: AppTheme.smallShadow,
                 ),
                 child: Text('Çevir',
-                    style: GoogleFonts.plusJakartaSans(
+                    style: GoogleFonts.outfit(
                         fontSize: 12, fontWeight: FontWeight.w800,
                         color: AppTheme.accent)),
               ),
@@ -691,9 +691,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   String _getGreeting() {
     final h = DateTime.now().hour;
-    if (h < 12) return 'Günaydın ☀️';
-    if (h < 18) return 'İyi günler 👋';
-    return 'İyi akşamlar 🌙';
+    if (h < 12) return 'Günaydın';
+    if (h < 18) return 'İyi günler';
+    return 'İyi akşamlar';
   }
 
   String _shortAddr(String addr) {

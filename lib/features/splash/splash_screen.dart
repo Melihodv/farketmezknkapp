@@ -5,6 +5,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import '../../core/theme/app_theme.dart';
 import '../../core/providers/app_provider.dart';
 
@@ -43,7 +44,16 @@ class _SplashScreenState extends State<SplashScreen>
     )..repeat(reverse: true);
 
     Future.delayed(const Duration(milliseconds: 2000), () {
-      if (mounted) setState(() => _showAuth = true);
+      if (!mounted) return;
+      // AppProvider may still be loading, but FirebaseAuth knows immediately if we have a session.
+      final isLoggedLocally = FirebaseAuth.instance.currentUser != null;
+      final user = context.read<AppProvider>().currentUser;
+      
+      if (isLoggedLocally || user != null) {
+        context.go('/home');
+      } else {
+        setState(() => _showAuth = true);
+      }
     });
   }
 
@@ -66,7 +76,7 @@ class _SplashScreenState extends State<SplashScreen>
         SnackBar(
           content: Text(
             'Giriş başarısız. Tekrar dene.',
-            style: GoogleFonts.plusJakartaSans(fontWeight: FontWeight.w600),
+            style: GoogleFonts.outfit(fontWeight: FontWeight.w600),
           ),
           backgroundColor: AppTheme.error,
           behavior: SnackBarBehavior.floating,
@@ -87,7 +97,7 @@ class _SplashScreenState extends State<SplashScreen>
         SnackBar(
           content: Text(
             'Apple girişi başarısız. Tekrar dene.',
-            style: GoogleFonts.plusJakartaSans(fontWeight: FontWeight.w600),
+            style: GoogleFonts.outfit(fontWeight: FontWeight.w600),
           ),
           backgroundColor: AppTheme.error,
           behavior: SnackBarBehavior.floating,
@@ -100,8 +110,22 @@ class _SplashScreenState extends State<SplashScreen>
   Future<void> _continueAsGuest() async {
     setState(() => _isLoading = true);
     final user = await context.read<AppProvider>().signInAsGuest();
-    if (user != null && mounted) context.go('/home');
-    if (mounted) setState(() => _isLoading = false);
+    if (user != null && mounted) {
+      context.go('/home');
+    } else if (mounted) {
+      setState(() => _isLoading = false);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            'Misafir girişi başarısız. Lütfen internet bağlantınızı kontrol edin.',
+            style: GoogleFonts.outfit(fontWeight: FontWeight.w600),
+          ),
+          backgroundColor: AppTheme.error,
+          behavior: SnackBarBehavior.floating,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+        ),
+      );
+    }
   }
 
   @override
@@ -292,7 +316,7 @@ class _SplashScreenState extends State<SplashScreen>
           ).createShader(bounds),
           child: Text(
             'Farketmez',
-            style: GoogleFonts.plusJakartaSans(
+            style: GoogleFonts.outfit(
               fontSize: 44,
               fontWeight: FontWeight.w900,
               color: Colors.white,
@@ -316,7 +340,7 @@ class _SplashScreenState extends State<SplashScreen>
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Text(
                 'K A N K A',
-                style: GoogleFonts.plusJakartaSans(
+                style: GoogleFonts.outfit(
                   fontSize: 12,
                   fontWeight: FontWeight.w700,
                   color: const Color(0xFFA78BFA),
@@ -332,7 +356,7 @@ class _SplashScreenState extends State<SplashScreen>
 
         Text(
           'Ne yapalım? Farketmez kanka.',
-          style: GoogleFonts.plusJakartaSans(
+          style: GoogleFonts.outfit(
             fontSize: 15,
             fontWeight: FontWeight.w400,
             color: Colors.white.withValues(alpha: 0.55),
@@ -366,9 +390,9 @@ class _SplashScreenState extends State<SplashScreen>
 
   Widget _buildFeaturePills() {
     final pills = [
-      ('📍', 'Konum bazlı'),
-      ('⚡', 'Anında öneri'),
-      ('🧠', 'Akıllı filtre'),
+      (Icons.location_on_rounded, 'Konum bazlı'),
+      (Icons.bolt_rounded, 'Anında öneri'),
+      (Icons.psychology_rounded, 'Akıllı filtre'),
     ];
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -384,11 +408,11 @@ class _SplashScreenState extends State<SplashScreen>
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(p.$1, style: const TextStyle(fontSize: 13)),
+              Icon(p.$1, color: Colors.white70, size: 14),
               const SizedBox(width: 5),
               Text(
                 p.$2,
-                style: GoogleFonts.plusJakartaSans(
+                style: GoogleFonts.outfit(
                   fontSize: 11,
                   fontWeight: FontWeight.w600,
                   color: Colors.white.withValues(alpha: 0.75),
@@ -426,7 +450,7 @@ class _SplashScreenState extends State<SplashScreen>
                 padding: const EdgeInsets.symmetric(horizontal: 14),
                 child: Text(
                   'ya da',
-                  style: GoogleFonts.plusJakartaSans(
+                  style: GoogleFonts.outfit(
                     fontSize: 12,
                     color: Colors.white.withValues(alpha: 0.35),
                   ),
@@ -456,7 +480,7 @@ class _SplashScreenState extends State<SplashScreen>
           Text(
             'Devam ederek Gizlilik Politikamızı kabul etmiş olursunuz.',
             textAlign: TextAlign.center,
-            style: GoogleFonts.plusJakartaSans(
+            style: GoogleFonts.outfit(
               fontSize: 11,
               color: Colors.white.withValues(alpha: 0.3),
               height: 1.5,
@@ -503,7 +527,7 @@ class _SplashScreenState extends State<SplashScreen>
                 child: Center(
                   child: Text(
                     'G',
-                    style: GoogleFonts.plusJakartaSans(
+                    style: GoogleFonts.outfit(
                       fontSize: 15,
                       fontWeight: FontWeight.w800,
                       color: const Color(0xFFEA4335),
@@ -514,7 +538,7 @@ class _SplashScreenState extends State<SplashScreen>
               const SizedBox(width: 12),
               Text(
                 'Google ile Giriş Yap',
-                style: GoogleFonts.plusJakartaSans(
+                style: GoogleFonts.outfit(
                   fontSize: 16,
                   fontWeight: FontWeight.w700,
                   color: const Color(0xFF1A1033),
@@ -554,7 +578,7 @@ class _SplashScreenState extends State<SplashScreen>
               const SizedBox(width: 12),
               Text(
                 'Apple ile Giriş Yap',
-                style: GoogleFonts.plusJakartaSans(
+                style: GoogleFonts.outfit(
                   fontSize: 16,
                   fontWeight: FontWeight.w700,
                   color: Colors.white,
@@ -581,7 +605,7 @@ class _SplashScreenState extends State<SplashScreen>
         child: Center(
           child: Text(
             'Misafir olarak devam et',
-            style: GoogleFonts.plusJakartaSans(
+            style: GoogleFonts.outfit(
               fontSize: 15,
               fontWeight: FontWeight.w500,
               color: Colors.white.withValues(alpha: 0.65),

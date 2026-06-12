@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../constants/app_constants.dart';
 import '../models/user_model.dart';
 import '../models/place_model.dart';
+import '../utils/logger.dart';
 
 class MemoryService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -24,8 +25,8 @@ class MemoryService {
       if (doc.exists) {
         return VisitModel.fromFirestore(doc.data()!, doc.id);
       }
-    } catch (e) {
-      // Silent
+    } catch (e, stack) {
+      AppLogger.error('getVisitRecord failed for placeId: $placeId', e, stack);
     }
     return null;
   }
@@ -66,8 +67,8 @@ class MemoryService {
             .doc(_userId)
             .set({'totalDiscoveries': FieldValue.increment(1)}, SetOptions(merge: true));
       }
-    } catch (e) {
-      // Silent
+    } catch (e, stack) {
+      AppLogger.error('recordVisit failed for placeId: ${place.placeId}', e, stack);
     }
   }
 
@@ -98,8 +99,8 @@ class MemoryService {
           'negativeCount': FieldValue.increment(1),
         });
       }
-    } catch (e) {
-      // Silent
+    } catch (e, stack) {
+      AppLogger.error('saveFeedback failed for placeId: $placeId', e, stack);
     }
   }
 
@@ -115,7 +116,8 @@ class MemoryService {
           .get();
 
       return snapshot.docs.map((d) => d.id).toList();
-    } catch (e) {
+    } catch (e, stack) {
+      AppLogger.error('getBlockedPlaceIds failed', e, stack);
       return [];
     }
   }
@@ -138,7 +140,8 @@ class MemoryService {
       return snapshot.docs
           .map((d) => VisitModel.fromFirestore(d.data() as Map<String, dynamic>, d.id))
           .toList();
-    } catch (e) {
+    } catch (e, stack) {
+      AppLogger.error('getAllVisits failed', e, stack);
       return [];
     }
   }
@@ -156,8 +159,8 @@ class MemoryService {
         'negativeCount': 0,
         'feedback': null,
       });
-    } catch (e) {
-      // Silent
+    } catch (e, stack) {
+      AppLogger.error('resetPlaceToPool failed for placeId: $placeId', e, stack);
     }
   }
 
@@ -173,8 +176,8 @@ class MemoryService {
       if (doc.exists) {
         return UserModel.fromFirestore(doc.data()!, doc.id);
       }
-    } catch (e) {
-      // Silent
+    } catch (e, stack) {
+      AppLogger.error('loadUserData failed', e, stack);
     }
     return null;
   }
@@ -187,8 +190,8 @@ class MemoryService {
           .collection(AppConstants.usersCollection)
           .doc(_userId)
           .update(data);
-    } catch (e) {
-      // Silent
+    } catch (e, stack) {
+      AppLogger.error('updateUserPreferences failed', e, stack);
     }
   }
 }

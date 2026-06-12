@@ -5,15 +5,20 @@ import 'package:http/http.dart' as http;
 import 'package:geolocator/geolocator.dart';
 import '../constants/app_constants.dart';
 import '../models/place_model.dart';
+import '../utils/logger.dart';
 
 class PlacesService {
-  static const String _baseUrl = 'https://maps.googleapis.com/maps/api';
+  // Google Maps yerine kendi Cloud Functions backend'imizi çağırıyoruz
+  static const String _baseUrl = 'https://us-central1-farketmezknk-257ca.cloudfunctions.net';
+  
+  // API Key artık uygulamanın içinde güvenlik riski yaratmıyor, 
+  // backend'de saklanıyor. Fakat parametre uyumluluğu için hala tutabiliriz.
   final String apiKey;
 
   PlacesService({String? key}) : apiKey = key ?? AppConstants.googleMapsApiKey;
 
   Uri _buildUrl(String path, Map<String, String> params) {
-    params['key'] = apiKey;
+    // Cloud function'a parametreleri aynen geçiriyoruz
     final query = params.entries.map((e) => '${e.key}=${Uri.encodeComponent(e.value)}').join('&');
     return Uri.parse('$_baseUrl$path?$query');
   }
@@ -30,6 +35,9 @@ class PlacesService {
     required String categoryId,
     List<String> excludePlaceIds = const [],
     Map<String, dynamic>? groupType,
+    bool isVegetarian = false,
+    bool likesSpicy = false,
+    String budgetLevel = 'fark_etmez',
   }) async {
     final category = AppConstants.categories.firstWhere(
       (c) => c['id'] == categoryId,
@@ -40,10 +48,14 @@ class PlacesService {
     List<PlaceModel> allPlaces = [];
 
     // groupType'tan keyword ve minRating çek
-    final keyword = groupType?['keyword'] as String?;
+    String finalKeyword = groupType?['keyword'] as String? ?? '';
+    if (isVegetarian) finalKeyword += ' vegetarian';
+    if (likesSpicy) finalKeyword += ' spicy';
+    finalKeyword = finalKeyword.trim();
+
     final minRating = (groupType?['minRating'] as double?) ?? 3.5;
 
-    for (final type in [types.first]) {
+    await Future.wait(types.map((type) async {
       try {
         final params = <String, String>{
           'location': '$latitude,$longitude',
@@ -51,10 +63,12 @@ class PlacesService {
           'type': type,
           'language': 'tr',
         };
-        // keyword varsa ekle (romantic cozy, family friendly vs)
-        if (keyword != null) params['keyword'] = keyword;
+        
+        if (finalKeyword.isNotEmpty) params['keyword'] = finalKeyword;
+        if (budgetLevel == 'ekonomik') params['maxprice'] = '1';
+        else if (budgetLevel == 'orta') params['maxprice'] = '2';
 
-        final url = _buildUrl('/place/nearbysearch/json', params);
+        final url = _buildUrl('/getNearbyPlaces', params);
         final response = await http.get(url);
         if (response.statusCode == 200) {
           final data = _parseResponse(response);
@@ -68,10 +82,10 @@ class PlacesService {
             allPlaces.addAll(places);
           }
         }
-      } catch (e) {
-        // Silent
+      } catch (e, stack) {
+        AppLogger.error('getNearbyPlaces failed for type: $type', e, stack);
       }
-    }
+    }));
 
     // Grup tipine göre type bazlı filtre (excludeTypes)
     final excludeTypes = (groupType?['excludeTypes'] as List<dynamic>?)?.cast<String>() ?? <String>[];
@@ -84,7 +98,7 @@ class PlacesService {
     // ── Strict radius filter (Haversine + yol düzeltme katsayısı) ──
     // Haversine düz hat mesafesi verir; şehir içi yol mesafesi ~1.45x daha uzun.
     // 0.68 katsayısıyla filtreleriz → Maps'te gösterilen mesafe seçilen değere yakın çıkar.
-    const roadCorrectionFactor = 0.68;
+    const roadCorrectionFactor = 0.85;
     allPlaces = allPlaces.where((p) {
       final dist = _haversineMeters(
         latitude, longitude, p.latitude, p.longitude,
@@ -139,7 +153,7 @@ class PlacesService {
   /// Mekan detayını getirir
   Future<Map<String, dynamic>?> getPlaceDetails(String placeId) async {
     try {
-      final url = _buildUrl('/place/details/json', {
+      final url = _buildUrl('/getPlaceDetails', {
         'place_id': placeId,
         'fields': 'name,formatted_address,formatted_phone_number,website,opening_hours,photos,rating,user_ratings_total,price_level',
         'language': 'tr',
@@ -149,7 +163,9 @@ class PlacesService {
         final data = _parseResponse(response);
         if (data['status'] == 'OK') return data['result'];
       }
-    } catch (e) {}
+    } catch (e, stack) {
+      AppLogger.error('getPlaceDetails failed for placeId: $placeId', e, stack);
+    }
     return null;
   }
 
@@ -161,7 +177,7 @@ class PlacesService {
     required double toLng,
   }) async {
     try {
-      final url = _buildUrl('/distancematrix/json', {
+      final url = _buildUrl('/getDistanceMatrix', {
         'origins': '$fromLat,$fromLng',
         'destinations': '$toLat,$toLng',
         'mode': 'walking',
@@ -185,7 +201,9 @@ class PlacesService {
           'duration': (durMap?['text'] as String?) ?? '',
         };
       }
-    } catch (_) {}
+    } catch (e, stack) {
+      AppLogger.error('getDistanceAndDuration failed', e, stack);
+    }
     return null;
   }
 
@@ -209,7 +227,8 @@ class PlacesService {
           timeLimit: Duration(seconds: 10),
         ),
       );
-    } catch (e) {
+    } catch (e, stack) {
+      AppLogger.error('getCurrentLocation failed', e, stack);
       return null;
     }
   }
@@ -217,7 +236,7 @@ class PlacesService {
   /// Koordinattan adres al
   Future<String> getAddressFromCoordinates(double lat, double lng) async {
     try {
-      final url = _buildUrl('/geocode/json', {'latlng': '$lat,$lng', 'language': 'tr'});
+      final url = _buildUrl('/getGeocode', {'latlng': '$lat,$lng', 'language': 'tr'});
       final response = await http.get(url);
       if (response.statusCode == 200) {
         final data = _parseResponse(response);
@@ -235,12 +254,14 @@ class PlacesService {
           return city;
         }
       }
-    } catch (e) {}
+    } catch (e, stack) {
+      AppLogger.error('getAddressFromCoordinates failed', e, stack);
+    }
     return 'Konum bilinmiyor';
   }
 
   /// Fotoğraf URL'si
   String getPhotoUrl(String photoReference, {int maxWidth = 800}) {
-    return '$_baseUrl/place/photo?maxwidth=$maxWidth&photo_reference=$photoReference&key=$apiKey';
+    return '$_baseUrl/getPhoto?maxwidth=$maxWidth&photo_reference=$photoReference';
   }
 }

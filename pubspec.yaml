@@ -60,6 +60,9 @@ dependencies:
   cupertino_icons: ^1.0.8
   sign_in_with_apple: ^8.0.0
 
+  # Audio
+  audioplayers: ^5.2.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -81,3 +84,4 @@ flutter:
     - assets/animations/
     - assets/icons/
     - assets/icon/
+    - assets/sounds/

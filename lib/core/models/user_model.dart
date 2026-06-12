@@ -172,8 +172,8 @@ class VisitModel {
       visitCount: visitCount ?? this.visitCount,
       positiveCount: positiveCount ?? this.positiveCount,
       negativeCount: negativeCount ?? this.negativeCount,
-      latitude: latitude ?? this.latitude,
-      longitude: longitude ?? this.longitude,
+      latitude: latitude,
+      longitude: longitude,
     );
   }
 }

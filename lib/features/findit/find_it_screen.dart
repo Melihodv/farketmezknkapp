@@ -339,8 +339,8 @@ class _FindItScreenState extends State<FindItScreen> {
           const SizedBox(width: 14),
           Expanded(
             child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Text('Nereden Bulurum?', style: GoogleFonts.plusJakartaSans(fontSize: 22, fontWeight: FontWeight.w800, color: AppTheme.textPrimary, letterSpacing: -0.5)),
-              Text(_sortType == FindItSortType.communityScore ? 'Topluluk skoruna göre sıralı' : 'Mesafeye göre sıralı', style: GoogleFonts.plusJakartaSans(fontSize: 12, color: AppTheme.textTertiary)),
+              Text('Nereden Bulurum?', style: GoogleFonts.outfit(fontSize: 22, fontWeight: FontWeight.w800, color: AppTheme.textPrimary, letterSpacing: -0.5)),
+              Text(_sortType == FindItSortType.communityScore ? 'Topluluk skoruna göre sıralı' : 'Mesafeye göre sıralı', style: GoogleFonts.outfit(fontSize: 12, color: AppTheme.textTertiary)),
             ]),
           ),
           Container(
@@ -364,12 +364,12 @@ class _FindItScreenState extends State<FindItScreen> {
               child: TextField(
                 controller: _controller,
                 focusNode: _focusNode,
-                style: GoogleFonts.plusJakartaSans(fontSize: 15, color: AppTheme.textPrimary),
+                style: GoogleFonts.outfit(fontSize: 15, color: AppTheme.textPrimary),
                 textInputAction: TextInputAction.search,
                 onSubmitted: _search,
                 decoration: InputDecoration(
                   hintText: 'Boşnak böreği, baklava, eczane...',
-                  hintStyle: GoogleFonts.plusJakartaSans(fontSize: 13.5, color: AppTheme.textTertiary),
+                  hintStyle: GoogleFonts.outfit(fontSize: 13.5, color: AppTheme.textTertiary),
                   prefixIcon: const Icon(Icons.search_rounded, color: AppTheme.textTertiary, size: 20),
                   suffixIcon: _controller.text.isNotEmpty
                       ? GestureDetector(
@@ -413,7 +413,7 @@ class _FindItScreenState extends State<FindItScreen> {
           const SizedBox(width: 8),
           Expanded(
             child: Text('Veriler eski olabilir. Gitmeden önce arayarak teyit et!',
-                style: GoogleFonts.plusJakartaSans(fontSize: 11.5, color: AppTheme.warning, fontWeight: FontWeight.w500)),
+                style: GoogleFonts.outfit(fontSize: 11.5, color: AppTheme.warning, fontWeight: FontWeight.w500)),
           ),
         ]),
       ),
@@ -441,7 +441,7 @@ class _FindItScreenState extends State<FindItScreen> {
                 child: Row(mainAxisSize: MainAxisSize.min, children: [
                   Text(tag['icon']!, style: const TextStyle(fontSize: 13)),
                   const SizedBox(width: 5),
-                  Text(tag['label']!, style: GoogleFonts.plusJakartaSans(fontSize: 12, fontWeight: FontWeight.w600, color: AppTheme.textSecondary)),
+                  Text(tag['label']!, style: GoogleFonts.outfit(fontSize: 12, fontWeight: FontWeight.w600, color: AppTheme.textSecondary)),
                 ]),
               ),
             ).animate()
@@ -470,7 +470,7 @@ class _FindItScreenState extends State<FindItScreen> {
           child: const Center(child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2.5)),
         ),
         const SizedBox(height: 16),
-        Text('Topluluk önerileri taranıyor...', style: GoogleFonts.plusJakartaSans(fontSize: 15, fontWeight: FontWeight.w600, color: AppTheme.textSecondary)),
+        Text('Topluluk önerileri taranıyor...', style: GoogleFonts.outfit(fontSize: 15, fontWeight: FontWeight.w600, color: AppTheme.textSecondary)),
       ]),
     ).animate().fadeIn(duration: 300.ms);
   }
@@ -482,11 +482,11 @@ class _FindItScreenState extends State<FindItScreen> {
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           Container(width: 64, height: 64, decoration: BoxDecoration(color: AppTheme.error.withValues(alpha: 0.1), shape: BoxShape.circle), child: const Icon(Icons.error_outline_rounded, color: AppTheme.error, size: 32)),
           const SizedBox(height: 16),
-          Text(_error!, style: GoogleFonts.plusJakartaSans(fontSize: 14, color: AppTheme.textSecondary), textAlign: TextAlign.center),
+          Text(_error!, style: GoogleFonts.outfit(fontSize: 14, color: AppTheme.textSecondary), textAlign: TextAlign.center),
           const SizedBox(height: 20),
           GestureDetector(
             onTap: () => _search(_controller.text),
-            child: Container(padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12), decoration: BoxDecoration(gradient: AppTheme.accentGradient, borderRadius: BorderRadius.circular(14), boxShadow: AppTheme.accentShadow), child: Text('Tekrar Dene', style: GoogleFonts.plusJakartaSans(color: Colors.white, fontWeight: FontWeight.w600))),
+            child: Container(padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12), decoration: BoxDecoration(gradient: AppTheme.accentGradient, borderRadius: BorderRadius.circular(14), boxShadow: AppTheme.accentShadow), child: Text('Tekrar Dene', style: GoogleFonts.outfit(color: Colors.white, fontWeight: FontWeight.w600))),
           ),
         ]),
       ),
@@ -504,9 +504,9 @@ class _FindItScreenState extends State<FindItScreen> {
             child: const Icon(Icons.location_searching_rounded, color: Colors.white, size: 40),
           ),
           const SizedBox(height: 20),
-          Text('Ne arıyorsun?', style: GoogleFonts.plusJakartaSans(fontSize: 20, fontWeight: FontWeight.w700, color: AppTheme.textPrimary)),
+          Text('Ne arıyorsun?', style: GoogleFonts.outfit(fontSize: 20, fontWeight: FontWeight.w700, color: AppTheme.textPrimary)),
           const SizedBox(height: 8),
-          Text('Boşnak böreği, baklava, eczane...\nen çok önerilen yeri bulalım.', style: GoogleFonts.plusJakartaSans(fontSize: 13, color: AppTheme.textTertiary), textAlign: TextAlign.center),
+          Text('Boşnak böreği, baklava, eczane...\nen çok önerilen yeri bulalım.', style: GoogleFonts.outfit(fontSize: 13, color: AppTheme.textTertiary), textAlign: TextAlign.center),
         ]),
       ),
     ).animate().scale(duration: 500.ms, curve: Curves.elasticOut);
@@ -515,11 +515,11 @@ class _FindItScreenState extends State<FindItScreen> {
   Widget _buildNoResults() {
     return Center(
       child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        const Text('🔍', style: TextStyle(fontSize: 48)),
+        const Icon(Icons.search_off_rounded, size: 48, color: AppTheme.textSecondary),
         const SizedBox(height: 16),
-        Text('Sonuç bulunamadı', style: GoogleFonts.plusJakartaSans(fontSize: 18, fontWeight: FontWeight.w700, color: AppTheme.textPrimary)),
+        Text('Sonuç bulunamadı', style: GoogleFonts.outfit(fontSize: 18, fontWeight: FontWeight.w700, color: AppTheme.textPrimary)),
         const SizedBox(height: 8),
-        Text('Farklı anahtar kelime dene\nyakınında olmayabilir', style: GoogleFonts.plusJakartaSans(fontSize: 13, color: AppTheme.textTertiary), textAlign: TextAlign.center),
+        Text('Farklı anahtar kelime dene\nyakınında olmayabilir', style: GoogleFonts.outfit(fontSize: 13, color: AppTheme.textTertiary), textAlign: TextAlign.center),
       ]),
     );
   }
@@ -534,7 +534,7 @@ class _FindItScreenState extends State<FindItScreen> {
           return Padding(
             padding: const EdgeInsets.only(bottom: 12),
             child: Row(children: [
-              Text('${_results.length} mekan bulundu', style: GoogleFonts.plusJakartaSans(fontSize: 12, fontWeight: FontWeight.w700, color: AppTheme.textTertiary, letterSpacing: 0.3)),
+              Text('${_results.length} mekan bulundu', style: GoogleFonts.outfit(fontSize: 12, fontWeight: FontWeight.w700, color: AppTheme.textTertiary, letterSpacing: 0.3)),
               const Spacer(),
               PopupMenuButton<FindItSortType>(
                 initialValue: _sortType,
@@ -549,7 +549,7 @@ class _FindItScreenState extends State<FindItScreen> {
                 child: Row(children: [
                   Icon(_sortType == FindItSortType.communityScore ? Icons.groups_rounded : Icons.near_me_rounded, size: 14, color: AppTheme.accent),
                   const SizedBox(width: 4),
-                  Text(_sortType == FindItSortType.communityScore ? 'Topluluk Skoru' : 'Mesafe (En Yakın)', style: GoogleFonts.plusJakartaSans(fontSize: 11, color: AppTheme.accent, fontWeight: FontWeight.w600)),
+                  Text(_sortType == FindItSortType.communityScore ? 'Topluluk Skoru' : 'Mesafe (En Yakın)', style: GoogleFonts.outfit(fontSize: 11, color: AppTheme.accent, fontWeight: FontWeight.w600)),
                   const SizedBox(width: 2),
                   const Icon(Icons.keyboard_arrow_down_rounded, size: 14, color: AppTheme.accent),
                 ]),
@@ -559,7 +559,7 @@ class _FindItScreenState extends State<FindItScreen> {
                     child: Row(children: [
                       Icon(Icons.groups_rounded, size: 18, color: _sortType == FindItSortType.communityScore ? AppTheme.accent : AppTheme.textTertiary),
                       const SizedBox(width: 8),
-                      Text('Topluluk Skoru', style: GoogleFonts.plusJakartaSans(fontSize: 13, fontWeight: _sortType == FindItSortType.communityScore ? FontWeight.w700 : FontWeight.w500, color: _sortType == FindItSortType.communityScore ? AppTheme.accent : AppTheme.textSecondary)),
+                      Text('Topluluk Skoru', style: GoogleFonts.outfit(fontSize: 13, fontWeight: _sortType == FindItSortType.communityScore ? FontWeight.w700 : FontWeight.w500, color: _sortType == FindItSortType.communityScore ? AppTheme.accent : AppTheme.textSecondary)),
                     ]),
                   ),
                   PopupMenuItem(
@@ -567,7 +567,7 @@ class _FindItScreenState extends State<FindItScreen> {
                     child: Row(children: [
                       Icon(Icons.near_me_rounded, size: 18, color: _sortType == FindItSortType.distance ? AppTheme.accent : AppTheme.textTertiary),
                       const SizedBox(width: 8),
-                      Text('Mesafe (En Yakın)', style: GoogleFonts.plusJakartaSans(fontSize: 13, fontWeight: _sortType == FindItSortType.distance ? FontWeight.w700 : FontWeight.w500, color: _sortType == FindItSortType.distance ? AppTheme.accent : AppTheme.textSecondary)),
+                      Text('Mesafe (En Yakın)', style: GoogleFonts.outfit(fontSize: 13, fontWeight: _sortType == FindItSortType.distance ? FontWeight.w700 : FontWeight.w500, color: _sortType == FindItSortType.distance ? AppTheme.accent : AppTheme.textSecondary)),
                     ]),
                   ),
                 ],
@@ -611,14 +611,14 @@ class _FindItScreenState extends State<FindItScreen> {
                   borderRadius: const BorderRadius.vertical(top: Radius.circular(17)),
                 ),
                 child: Row(children: [
-                  Text(_sortType == FindItSortType.communityScore ? '👑' : '📍', style: const TextStyle(fontSize: 13)),
+                  Icon(_sortType == FindItSortType.communityScore ? Icons.workspace_premium_rounded : Icons.location_on_rounded, size: 13, color: Colors.white),
                   const SizedBox(width: 6),
-                  Text(_sortType == FindItSortType.communityScore ? 'Topluluk\'un En Çok Önerdiği' : 'Sana En Yakın Mekan', style: GoogleFonts.plusJakartaSans(fontSize: 11.5, fontWeight: FontWeight.w700, color: Colors.white)),
+                  Text(_sortType == FindItSortType.communityScore ? 'Topluluk\'un En Çok Önerdiği' : 'Sana En Yakın Mekan', style: GoogleFonts.outfit(fontSize: 11.5, fontWeight: FontWeight.w700, color: Colors.white)),
                   const Spacer(),
                   if (r.ratingsTotal > 0 && _sortType == FindItSortType.communityScore)
-                    Text(r.reviewLabel, style: GoogleFonts.plusJakartaSans(fontSize: 10.5, color: Colors.white70, fontWeight: FontWeight.w500)),
+                    Text(r.reviewLabel, style: GoogleFonts.outfit(fontSize: 10.5, color: Colors.white70, fontWeight: FontWeight.w500)),
                   if (_sortType == FindItSortType.distance)
-                    Text(r.distanceLabel, style: GoogleFonts.plusJakartaSans(fontSize: 10.5, color: Colors.white70, fontWeight: FontWeight.w500)),
+                    Text(r.distanceLabel, style: GoogleFonts.outfit(fontSize: 10.5, color: Colors.white70, fontWeight: FontWeight.w500)),
                 ]),
               ),
 
@@ -650,7 +650,7 @@ class _FindItScreenState extends State<FindItScreen> {
                         ),
                         child: Center(
                           child: Text('${index + 1}',
-                              style: GoogleFonts.plusJakartaSans(fontSize: 9, fontWeight: FontWeight.w800,
+                              style: GoogleFonts.outfit(fontSize: 9, fontWeight: FontWeight.w800,
                                   color: index < 3 ? Colors.white : AppTheme.textSecondary)),
                         ),
                       ),
@@ -663,11 +663,11 @@ class _FindItScreenState extends State<FindItScreen> {
                 Expanded(
                   child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                     Text(r.name,
-                        style: GoogleFonts.plusJakartaSans(fontSize: 14, fontWeight: FontWeight.w700, color: AppTheme.textPrimary),
+                        style: GoogleFonts.outfit(fontSize: 14, fontWeight: FontWeight.w700, color: AppTheme.textPrimary),
                         maxLines: 1, overflow: TextOverflow.ellipsis),
                     const SizedBox(height: 2),
                     Text(r.address,
-                        style: GoogleFonts.plusJakartaSans(fontSize: 11, color: AppTheme.textTertiary),
+                        style: GoogleFonts.outfit(fontSize: 11, color: AppTheme.textTertiary),
                         maxLines: 1, overflow: TextOverflow.ellipsis),
                     const SizedBox(height: 6),
 
@@ -719,7 +719,7 @@ class _FindItScreenState extends State<FindItScreen> {
       child: Row(mainAxisSize: MainAxisSize.min, children: [
         Icon(icon, size: 10, color: gradient ? Colors.white : (color ?? AppTheme.textSecondary)),
         const SizedBox(width: 3),
-        Text(text, style: GoogleFonts.plusJakartaSans(fontSize: 10, fontWeight: FontWeight.w600,
+        Text(text, style: GoogleFonts.outfit(fontSize: 10, fontWeight: FontWeight.w600,
             color: gradient ? Colors.white : (color ?? AppTheme.textSecondary))),
       ]),
     );

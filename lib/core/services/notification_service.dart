@@ -3,6 +3,7 @@ import 'package:flutter/material.dart' show Color;
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz_data;
+import '../utils/logger.dart';
 
 class NotificationService {
   static final NotificationService _instance = NotificationService._internal();
@@ -114,7 +115,9 @@ class NotificationService {
         uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
         matchDateTimeComponents: DateTimeComponents.time,
       );
-    } catch (_) {}
+    } catch (e, stack) {
+      AppLogger.error('Failed to schedule daily notification id: $id', e, stack);
+    }
   }
 
   Future<void> _scheduleWeekly({
@@ -130,7 +133,9 @@ class NotificationService {
         uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
         matchDateTimeComponents: DateTimeComponents.dayOfWeekAndTime,
       );
-    } catch (_) {}
+    } catch (e, stack) {
+      AppLogger.error('Failed to schedule weekly notification id: $id', e, stack);
+    }
   }
 
   tz.TZDateTime _nextInstanceOf(int hour, int minute) {

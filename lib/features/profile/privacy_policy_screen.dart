@@ -20,7 +20,7 @@ class PrivacyPolicyScreen extends StatelessWidget {
           child: const Icon(Icons.arrow_back_ios_rounded, color: AppTheme.textPrimary, size: 20),
         ),
         title: Text('Gizlilik Politikası',
-            style: GoogleFonts.plusJakartaSans(fontSize: 18, fontWeight: FontWeight.w700, color: AppTheme.textPrimary)),
+            style: GoogleFonts.outfit(fontSize: 18, fontWeight: FontWeight.w700, color: AppTheme.textPrimary)),
         centerTitle: true,
       ),
       body: ListView(
@@ -39,10 +39,10 @@ class PrivacyPolicyScreen extends StatelessWidget {
               const Icon(Icons.shield_rounded, color: Colors.white, size: 32),
               const SizedBox(height: 10),
               Text('Gizliliğiniz\nBizim İçin Önemli',
-                  style: GoogleFonts.plusJakartaSans(fontSize: 20, fontWeight: FontWeight.w800, color: Colors.white, height: 1.2)),
+                  style: GoogleFonts.outfit(fontSize: 20, fontWeight: FontWeight.w800, color: Colors.white, height: 1.2)),
               const SizedBox(height: 6),
               Text('Son Güncelleme: 10 Mayıs 2026',
-                  style: GoogleFonts.plusJakartaSans(fontSize: 12, color: Colors.white70)),
+                  style: GoogleFonts.outfit(fontSize: 12, color: Colors.white70)),
             ]),
           ).animate().fadeIn(duration: 400.ms).slideY(begin: 0.1, duration: 400.ms),
 
@@ -172,7 +172,7 @@ class PrivacyPolicyScreen extends StatelessWidget {
                 ),
                 const SizedBox(width: 10),
                 Text('6. İletişim',
-                    style: GoogleFonts.plusJakartaSans(fontSize: 16, fontWeight: FontWeight.w700, color: AppTheme.textPrimary)),
+                    style: GoogleFonts.outfit(fontSize: 16, fontWeight: FontWeight.w700, color: AppTheme.textPrimary)),
               ]),
               const SizedBox(height: 12),
               _contactRow(Icons.business_rounded, 'Geliştirici', 'Ottovate'),
@@ -186,7 +186,7 @@ class PrivacyPolicyScreen extends StatelessWidget {
           const SizedBox(height: 24),
           Center(
             child: Text('© 2026 Ottovate. Tüm hakları saklıdır.',
-                style: GoogleFonts.plusJakartaSans(fontSize: 11, color: AppTheme.textTertiary)),
+                style: GoogleFonts.outfit(fontSize: 11, color: AppTheme.textTertiary)),
           ),
         ],
       ),
@@ -202,7 +202,7 @@ class PrivacyPolicyScreen extends StatelessWidget {
         boxShadow: AppTheme.smallShadow,
       ),
       child: Text(text,
-          style: GoogleFonts.plusJakartaSans(fontSize: 13, color: AppTheme.textSecondary, height: 1.6)),
+          style: GoogleFonts.outfit(fontSize: 13, color: AppTheme.textSecondary, height: 1.6)),
     ).animate().fadeIn(duration: 400.ms, delay: 100.ms);
   }
 
@@ -221,13 +221,13 @@ class PrivacyPolicyScreen extends StatelessWidget {
             width: 30, height: 30,
             decoration: BoxDecoration(gradient: AppTheme.accentGradient, borderRadius: BorderRadius.circular(8)),
             child: Center(
-              child: Text(number, style: GoogleFonts.plusJakartaSans(fontSize: 13, fontWeight: FontWeight.w800, color: Colors.white)),
+              child: Text(number, style: GoogleFonts.outfit(fontSize: 13, fontWeight: FontWeight.w800, color: Colors.white)),
             ),
           ),
           const SizedBox(width: 10),
           Expanded(
             child: Text(title,
-                style: GoogleFonts.plusJakartaSans(fontSize: 15, fontWeight: FontWeight.w700, color: AppTheme.textPrimary)),
+                style: GoogleFonts.outfit(fontSize: 15, fontWeight: FontWeight.w700, color: AppTheme.textPrimary)),
           ),
         ]),
         const SizedBox(height: 14),
@@ -242,10 +242,10 @@ class PrivacyPolicyScreen extends StatelessWidget {
             const SizedBox(width: 10),
             Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text(item.title,
-                  style: GoogleFonts.plusJakartaSans(fontSize: 13, fontWeight: FontWeight.w600, color: AppTheme.textPrimary)),
+                  style: GoogleFonts.outfit(fontSize: 13, fontWeight: FontWeight.w600, color: AppTheme.textPrimary)),
               const SizedBox(height: 3),
               Text(item.body,
-                  style: GoogleFonts.plusJakartaSans(fontSize: 12, color: AppTheme.textSecondary, height: 1.5)),
+                  style: GoogleFonts.outfit(fontSize: 12, color: AppTheme.textSecondary, height: 1.5)),
             ])),
           ]),
         )),

@@ -64,7 +64,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
         const Spacer(),
 
         // Emoji indicator
-        Text('🏠', style: const TextStyle(fontSize: 64))
+        const Icon(Icons.maps_home_work_rounded, size: 64, color: AppTheme.accent)
             .animate()
             .scale(duration: 500.ms, curve: Curves.elasticOut),
 
@@ -72,7 +72,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
 
         Text(
           'Nasıldı?',
-          style: GoogleFonts.plusJakartaSans(
+          style: GoogleFonts.outfit(
             fontSize: 32,
             fontWeight: FontWeight.w800,
             color: AppTheme.textPrimary,
@@ -84,7 +84,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
 
         Text(
           placeName,
-          style: GoogleFonts.plusJakartaSans(
+          style: GoogleFonts.outfit(
             fontSize: 16,
             color: AppTheme.textSecondary,
             fontWeight: FontWeight.w500,
@@ -100,7 +100,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
             Expanded(
               child: _buildFeedbackButton(
                 feedback: 1,
-                emoji: '👍',
+                icon: Icons.thumb_up_rounded,
                 label: 'Güzeldi',
                 color: AppTheme.success,
               ),
@@ -109,7 +109,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
             Expanded(
               child: _buildFeedbackButton(
                 feedback: -1,
-                emoji: '👎',
+                icon: Icons.thumb_down_rounded,
                 label: 'Beğenmedim',
                 color: AppTheme.error,
               ),
@@ -122,10 +122,10 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
           const SizedBox(height: 20),
           TextField(
             controller: _noteController,
-            style: GoogleFonts.plusJakartaSans(color: AppTheme.textPrimary),
+            style: GoogleFonts.outfit(color: AppTheme.textPrimary),
             decoration: InputDecoration(
               hintText: 'Bir not ekle (opsiyonel)...',
-              hintStyle: GoogleFonts.plusJakartaSans(color: AppTheme.textTertiary),
+              hintStyle: GoogleFonts.outfit(color: AppTheme.textTertiary),
             ),
             maxLength: 100,
           ).animate().fadeIn(duration: 300.ms),
@@ -135,7 +135,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
             onTap: () => setState(() => _showNote = true),
             child: Text(
               '+ Not ekle',
-              style: GoogleFonts.plusJakartaSans(
+              style: GoogleFonts.outfit(
                 fontSize: 13,
                 color: AppTheme.textTertiary,
                 decoration: TextDecoration.underline,
@@ -168,7 +168,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
               child: Center(
                 child: Text(
                   'Gönder',
-                  style: GoogleFonts.plusJakartaSans(
+                  style: GoogleFonts.outfit(
                     fontSize: 16,
                     fontWeight: FontWeight.w700,
                     color: Colors.white,
@@ -184,7 +184,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
           onTap: _skip,
           child: Text(
             'Atla',
-            style: GoogleFonts.plusJakartaSans(
+            style: GoogleFonts.outfit(
               fontSize: 14,
               color: AppTheme.textTertiary,
             ),
@@ -198,7 +198,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
 
   Widget _buildFeedbackButton({
     required int feedback,
-    required String emoji,
+    required IconData icon,
     required String label,
     required Color color,
   }) {
@@ -219,11 +219,11 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
         ),
         child: Column(
           children: [
-            Text(emoji, style: const TextStyle(fontSize: 40)),
+            Icon(icon, size: 40, color: selected ? color : AppTheme.textSecondary),
             const SizedBox(height: 8),
             Text(
               label,
-              style: GoogleFonts.plusJakartaSans(
+              style: GoogleFonts.outfit(
                 fontSize: 15,
                 fontWeight: FontWeight.w600,
                 color: selected ? color : AppTheme.textSecondary,
@@ -239,25 +239,32 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text('✅', style: const TextStyle(fontSize: 80))
+        const Icon(Icons.check_circle_rounded, size: 80, color: AppTheme.success)
             .animate()
             .scale(duration: 500.ms, curve: Curves.elasticOut),
         const SizedBox(height: 24),
         Text(
           'Teşekkürler!',
-          style: GoogleFonts.plusJakartaSans(
+          style: GoogleFonts.outfit(
             fontSize: 28,
             fontWeight: FontWeight.w800,
             color: AppTheme.textPrimary,
           ),
         ).animate().fadeIn(duration: 400.ms, delay: 200.ms),
         const SizedBox(height: 8),
-        Text(
-          'Sistem seni öğreniyor 🧠',
-          style: GoogleFonts.plusJakartaSans(
-            fontSize: 15,
-            color: AppTheme.textSecondary,
-          ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Sistem seni öğreniyor',
+              style: GoogleFonts.outfit(
+                fontSize: 15,
+                color: AppTheme.textSecondary,
+              ),
+            ),
+            const SizedBox(width: 4),
+            const Icon(Icons.psychology_rounded, size: 18, color: AppTheme.accent),
+          ],
         ).animate().fadeIn(duration: 400.ms, delay: 300.ms),
       ],
     );

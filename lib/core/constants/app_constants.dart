@@ -89,50 +89,50 @@ class AppConstants {
 
   // ── Outdoor Activity Suggestions ────────────────────────
   static const List<String> outdoorActivities = [
-    'Açık havanın tadını çıkarın, güzel bir yürüyüş yapın 🚶‍♂️',
-    'Doğanın içinde derin bir nefes alıp stresten uzaklaşın 🍃',
-    'Manzaraya karşı oturup sakinliğin keyfini sürün 🌅',
-    'Etrafı keşfedin ve güzel fotoğraflar çekin 📸',
-    'Güneşin veya esintinin tadını çıkararak dinlenin ☀️',
-    'Beraber sessizliğin ve huzurun tadını çıkarın 🏕️',
-    'Yakın çevrede daha önce görmediğiniz detayları keşfedin 🔍',
-    'Sevdiğiniz bir içeceği alıp yürüyüşe eşlik edin ☕',
+    'Açık havanın tadını çıkarın, güzel bir yürüyüş yapın',
+    'Doğanın içinde derin bir nefes alıp stresten uzaklaşın',
+    'Manzaraya karşı oturup sakinliğin keyfini sürün',
+    'Etrafı keşfedin ve güzel fotoğraflar çekin',
+    'Güneşin veya esintinin tadını çıkararak dinlenin',
+    'Beraber sessizliğin ve huzurun tadını çıkarın',
+    'Yakın çevrede daha önce görmediğiniz detayları keşfedin',
+    'Sevdiğiniz bir içeceği alıp yürüyüşe eşlik edin',
   ];
 
   // ── Romantic Activity Suggestions ───────────────────────
   static const List<String> romanticActivities = [
-    'Şehrin en güzel manzarasını bulup sessizliğin tadını çıkarın 🌃',
-    'Birlikte yeni bir lezzet keşfedin, daha önce denemediğiniz bir şey sipariş edin 🍽️',
-    'Gelecekteki seyahat planlarınızı konuşun ve hayal kurun ✈️',
-    'Birbirinize en sevdiğiniz anılarınızı anlatın 🥰',
-    'Telefonları sessize alıp sadece anın tadını çıkarın 📵',
-    'Tatlı veya kahve eşliğinde uzun uzun sohbet edin ☕🍰',
-    'Akşam yürüyüşü yapıp günün yorgunluğunu atın 🌙',
-    'İlk tanıştığınız gün hakkında konuşup eski günleri yad edin 💭',
-    'Bugünü unutulmaz kılmak için güzel bir fotoğraf çekilin 📷',
+    'Şehrin en güzel manzarasını bulup sessizliğin tadını çıkarın',
+    'Birlikte yeni bir lezzet keşfedin, daha önce denemediğiniz bir şey sipariş edin',
+    'Gelecekteki seyahat planlarınızı konuşun ve hayal kurun',
+    'Birbirinize en sevdiğiniz anılarınızı anlatın',
+    'Telefonları sessize alıp sadece anın tadını çıkarın',
+    'Tatlı veya kahve eşliğinde uzun uzun sohbet edin',
+    'Akşam yürüyüşü yapıp günün yorgunluğunu atın',
+    'İlk tanıştığınız gün hakkında konuşup eski günleri yad edin',
+    'Bugünü unutulmaz kılmak için güzel bir fotoğraf çekilin',
   ];
 
   // ── Friends Activity Suggestions ──────────────────────
   static const List<String> friendsActivities = [
-    'En komik anılarınızı hatırlayıp gülmekten karnınıza ağrılar girsin 😂',
-    'Kim hesabı ödeyecek diye iddiaya girin veya alman usulü yapın 💸',
-    'Ortak bir tatil planı yapın, bakalım kim önce vazgeçecek 🏖️',
-    'Bol bol fotoğraf çekilip anı ölümsüzleştirin 📸',
-    'Uzun zamandır görüşmediğiniz konuları masaya yatırın 🗣️',
-    'Favori dizileriniz veya filmleriniz hakkında tartışın 🎬',
-    'Grupça yeni bir mekan veya etkinlik keşfedin 🗺️',
-    'Kolektif bir playlist açıp sevdiğiniz müzikleri dinleyin 🎵',
+    'En komik anılarınızı hatırlayıp gülmekten karnınıza ağrılar girsin',
+    'Kim hesabı ödeyecek diye iddiaya girin veya alman usulü yapın',
+    'Ortak bir tatil planı yapın, bakalım kim önce vazgeçecek',
+    'Bol bol fotoğraf çekilip anı ölümsüzleştirin',
+    'Uzun zamandır görüşmediğiniz konuları masaya yatırın',
+    'Favori dizileriniz veya filmleriniz hakkında tartışın',
+    'Grupça yeni bir mekan veya etkinlik keşfedin',
+    'Kolektif bir playlist açıp sevdiğiniz müzikleri dinleyin',
   ];
 
   // ── Solo Activity Suggestions ──────────────────────────
   static const List<String> soloActivities = [
-    'Kulaklığını tak ve favori şarkılarınla kendi dünyana çekil 🎧',
-    'O çok ertelediğin kitabı veya podcast\'i bitirmek için harika bir zaman 📖',
-    'Sadece etrafı izle, anın tadını çıkar ve düşüncelerini toparla ☕',
-    'Kendine güzel bir kahve veya tatlı ısmarla, bunu hak ettin 🍰',
-    'Gelecek hedeflerini gözden geçirip planlar yap 📝',
-    'Şehrin sokaklarında kaybolarak yeni bir mekan keşfet 🚶‍♂️',
-    'Telefonu bir kenara bırakıp zihnini dinlendir 📵',
+    'Kulaklığını tak ve favori şarkılarınla kendi dünyana çekil',
+    'O çok ertelediğin kitabı veya podcast\'i bitirmek için harika bir zaman',
+    'Sadece etrafı izle, anın tadını çıkar ve düşüncelerini toparla',
+    'Kendine güzel bir kahve veya tatlı ısmarla, bunu hak ettin',
+    'Gelecek hedeflerini gözden geçirip planlar yap',
+    'Şehrin sokaklarında kaybolarak yeni bir mekan keşfet',
+    'Telefonu bir kenara bırakıp zihnini dinlendir',
   ];
 
   // ── Memory ──────────────────────────────────────────────
@@ -156,6 +156,7 @@ class AppConstants {
   static const String prefVegetarian      = 'is_vegetarian';
   static const String prefSpicy           = 'likes_spicy';
   static const String prefBudget          = 'budget_level';
+  static const String prefSoundEnabled    = 'is_sound_enabled';
 
   // ── Budget ──────────────────────────────────────────────
   static const List<String> budgetLevels = ['Ekonomik', 'Orta', 'Fark etmez'];

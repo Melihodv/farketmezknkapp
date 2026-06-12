@@ -4,6 +4,7 @@ import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../constants/app_constants.dart';
 import '../models/user_model.dart';
+import '../utils/logger.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -48,7 +49,8 @@ class AuthService {
         isGuest: false,
         createdAt: DateTime.now(),
       );
-    } catch (e) {
+    } catch (e, stack) {
+      AppLogger.error('signInWithGoogle failed', e, stack);
       return null;
     }
   }
@@ -92,7 +94,8 @@ class AuthService {
         isGuest: false,
         createdAt: DateTime.now(),
       );
-    } catch (e) {
+    } catch (e, stack) {
+      AppLogger.error('signInWithApple failed', e, stack);
       return null;
     }
   }
@@ -102,12 +105,21 @@ class AuthService {
     try {
       final userCredential = await _auth.signInAnonymously();
       final user = userCredential.user!;
-      return await _createOrUpdateUser(
+      
+      final userModel = await _createOrUpdateUser(
         uid: user.uid,
         displayName: 'Misafir',
         isGuest: true,
       );
-    } catch (e) {
+
+      return userModel ?? UserModel(
+        uid: user.uid,
+        displayName: 'Misafir',
+        isGuest: true,
+        createdAt: DateTime.now(),
+      );
+    } catch (e, stack) {
+      AppLogger.error('signInAsGuest failed', e, stack);
       return null;
     }
   }
@@ -135,7 +147,8 @@ class AuthService {
         return userModel;
       }
       return UserModel.fromFirestore(doc.data()!, uid);
-    } catch (e) {
+    } catch (e, stack) {
+      AppLogger.error('_createOrUpdateUser failed', e, stack);
       return null;
     }
   }
@@ -144,7 +157,9 @@ class AuthService {
     try {
       await _googleSignIn.signOut();
       await _auth.signOut();
-    } catch (_) {}
+    } catch (e, stack) {
+      AppLogger.error('signOut failed', e, stack);
+    }
   }
 
   Future<void> deleteAccount() async {
@@ -154,11 +169,13 @@ class AuthService {
         // Remove from Firestore
         await _firestore.collection(AppConstants.usersCollection).doc(user.uid).delete();
         // Disconnect & Delete from Auth providers
-        await _googleSignIn.disconnect().catchError((_) {});
+        await _googleSignIn.disconnect().catchError((_) => null);
         await user.delete();
       }
-    } catch (e) {
+    } catch (e, stack) {
+      AppLogger.error('deleteAccount failed', e, stack);
       // Re-authentication might be required, but we try our best.
+      throw Exception('Hesap silinirken bir hata oluştu. Lütfen tekrar giriş yapıp deneyin.');
     }
   }
 
@@ -171,7 +188,9 @@ class AuthService {
           .doc(user.uid)
           .get();
       if (doc.exists) return UserModel.fromFirestore(doc.data()!, doc.id);
-    } catch (_) {}
+    } catch (e, stack) {
+      AppLogger.error('loadUser failed', e, stack);
+    }
     return null;
   }
 }

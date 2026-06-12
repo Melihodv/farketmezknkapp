@@ -79,9 +79,9 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
                   child: const Icon(Icons.search_off_rounded, color: AppTheme.accent, size: 40),
                 ),
                 const SizedBox(height: 20),
-                Text('Mekan Bulunamadı', style: GoogleFonts.plusJakartaSans(fontSize: 20, fontWeight: FontWeight.w700, color: AppTheme.textPrimary)),
+                Text('Mekan Bulunamadı', style: GoogleFonts.outfit(fontSize: 20, fontWeight: FontWeight.w700, color: AppTheme.textPrimary)),
                 const SizedBox(height: 8),
-                Text('Mesafeyi artır veya farklı kategori dene!', style: GoogleFonts.plusJakartaSans(fontSize: 14, color: AppTheme.textSecondary), textAlign: TextAlign.center),
+                Text('Mesafeyi artır veya farklı kategori dene!', style: GoogleFonts.outfit(fontSize: 14, color: AppTheme.textSecondary), textAlign: TextAlign.center),
                 const SizedBox(height: 28),
                 _btn(text: 'Geri Dön', onTap: () => context.pop()),
               ]),
@@ -125,7 +125,14 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
                   margin: const EdgeInsets.only(right: 12, top: 8),
                   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                   decoration: BoxDecoration(gradient: AppTheme.accentGradient, borderRadius: BorderRadius.circular(20)),
-                  child: Text('⭐ Öne Çıkan', style: GoogleFonts.plusJakartaSans(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.white)),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(Icons.star_rounded, size: 12, color: Colors.white),
+                      const SizedBox(width: 4),
+                      Text('Öne Çıkan', style: GoogleFonts.outfit(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.white)),
+                    ],
+                  ),
                 ),
             ],
             flexibleSpace: FlexibleSpaceBar(
@@ -181,7 +188,7 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
                         const Icon(Icons.history_rounded, color: AppTheme.warning, size: 16),
                         const SizedBox(width: 8),
                         Text('Buraya daha önce gittin (${visitRecord.visitCount} kez)',
-                            style: GoogleFonts.plusJakartaSans(fontSize: 12, color: AppTheme.warning, fontWeight: FontWeight.w500)),
+                            style: GoogleFonts.outfit(fontSize: 12, color: AppTheme.warning, fontWeight: FontWeight.w500)),
                       ]),
                     ).animate().slideY(begin: -0.2, duration: 300.ms).fadeIn(duration: 300.ms),
 
@@ -192,7 +199,7 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
                     child: Row(mainAxisSize: MainAxisSize.min, children: [
                       Icon(_catIcon(place.category), color: AppTheme.accent, size: 13),
                       const SizedBox(width: 5),
-                      Text(catData['label'] as String, style: GoogleFonts.plusJakartaSans(fontSize: 12, fontWeight: FontWeight.w600, color: AppTheme.accent)),
+                      Text(catData['label'] as String, style: GoogleFonts.outfit(fontSize: 12, fontWeight: FontWeight.w600, color: AppTheme.accent)),
                     ]),
                   ).animate().fadeIn(duration: 400.ms, delay: 100.ms),
 
@@ -201,7 +208,7 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
                   // Name
                   Text(
                     place.name,
-                    style: GoogleFonts.plusJakartaSans(fontSize: 28, fontWeight: FontWeight.w800, color: AppTheme.textPrimary, letterSpacing: -0.5, height: 1.1),
+                    style: GoogleFonts.outfit(fontSize: 28, fontWeight: FontWeight.w800, color: AppTheme.textPrimary, letterSpacing: -0.5, height: 1.1),
                   ).animate().slideX(begin: -0.1, duration: 400.ms, delay: 150.ms).fadeIn(duration: 400.ms, delay: 150.ms),
 
                   const SizedBox(height: 6),
@@ -211,7 +218,7 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
                     const Icon(Icons.location_on_rounded, color: AppTheme.textTertiary, size: 14),
                     const SizedBox(width: 4),
                     Expanded(child: Text(place.address,
-                        style: GoogleFonts.plusJakartaSans(fontSize: 13, color: AppTheme.textSecondary),
+                        style: GoogleFonts.outfit(fontSize: 13, color: AppTheme.textSecondary),
                         maxLines: 2, overflow: TextOverflow.ellipsis)),
                   ]).animate().fadeIn(duration: 400.ms, delay: 200.ms),
 
@@ -245,7 +252,7 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
                         const Icon(Icons.campaign_rounded, color: AppTheme.accent, size: 18),
                         const SizedBox(width: 10),
                         Expanded(child: Text(place.sponsoredNote!,
-                            style: GoogleFonts.plusJakartaSans(fontSize: 13, color: AppTheme.accent))),
+                            style: GoogleFonts.outfit(fontSize: 13, color: AppTheme.accent))),
                       ]),
                     ),
                   ],
@@ -263,12 +270,12 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
                         const Icon(Icons.tips_and_updates_rounded, color: Colors.white, size: 16),
                         const SizedBox(width: 6),
                         Text(_activityLabel,
-                            style: GoogleFonts.plusJakartaSans(fontSize: 11, fontWeight: FontWeight.w700,
+                            style: GoogleFonts.outfit(fontSize: 11, fontWeight: FontWeight.w700,
                                 color: Colors.white70, letterSpacing: 0.3)),
                       ]),
                       const SizedBox(height: 8),
                       Text(_activitySuggestion,
-                          style: GoogleFonts.plusJakartaSans(fontSize: 14, fontWeight: FontWeight.w600,
+                          style: GoogleFonts.outfit(fontSize: 14, fontWeight: FontWeight.w600,
                               color: Colors.white, height: 1.4)),
                     ]),
                   ).animate().slideY(begin: 0.2, duration: 400.ms, delay: 350.ms).fadeIn(duration: 400.ms, delay: 350.ms),
@@ -298,7 +305,7 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
                           const Icon(Icons.navigation_rounded, color: Colors.white, size: 22),
                           const SizedBox(width: 10),
                           Text('Gidiyoruz!',
-                              style: GoogleFonts.plusJakartaSans(fontSize: 18, fontWeight: FontWeight.w700, color: Colors.white)),
+                              style: GoogleFonts.outfit(fontSize: 18, fontWeight: FontWeight.w700, color: Colors.white)),
                         ])),
                       ),
                     ).animate().scale(duration: 400.ms, delay: 400.ms, curve: Curves.elasticOut)
@@ -313,7 +320,7 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
                         const Icon(Icons.check_circle_rounded, color: AppTheme.success, size: 22),
                         const SizedBox(width: 10),
                         Text('Google Maps açıldı!',
-                            style: GoogleFonts.plusJakartaSans(fontSize: 16, fontWeight: FontWeight.w600, color: AppTheme.success)),
+                            style: GoogleFonts.outfit(fontSize: 16, fontWeight: FontWeight.w600, color: AppTheme.success)),
                       ])),
                     ),
 
@@ -335,7 +342,7 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
                         const Icon(Icons.refresh_rounded, color: AppTheme.textSecondary, size: 18),
                         const SizedBox(width: 8),
                         Text('Bir daha çevir',
-                            style: GoogleFonts.plusJakartaSans(fontSize: 15, fontWeight: FontWeight.w600, color: AppTheme.textSecondary)),
+                            style: GoogleFonts.outfit(fontSize: 15, fontWeight: FontWeight.w600, color: AppTheme.textSecondary)),
                       ])),
                     ),
                   ).animate().fadeIn(duration: 400.ms, delay: 500.ms),
@@ -356,7 +363,7 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
           Icon(_catIcon(catData['id'] as String), color: Colors.white.withValues(alpha: 0.8), size: 80),
           const SizedBox(height: 8),
           Text(catData['label'] as String,
-              style: GoogleFonts.plusJakartaSans(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.white60)),
+              style: GoogleFonts.outfit(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.white60)),
         ]),
       ),
     );
@@ -372,7 +379,7 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
       child: Row(mainAxisSize: MainAxisSize.min, children: [
         Icon(icon, size: 13, color: color ?? AppTheme.textSecondary),
         const SizedBox(width: 4),
-        Text(text, style: GoogleFonts.plusJakartaSans(fontSize: 12, fontWeight: FontWeight.w500, color: color ?? AppTheme.textSecondary)),
+        Text(text, style: GoogleFonts.outfit(fontSize: 12, fontWeight: FontWeight.w500, color: color ?? AppTheme.textSecondary)),
       ]),
     );
   }
@@ -386,7 +393,7 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
             gradient: AppTheme.accentGradient,
             borderRadius: BorderRadius.circular(14),
             boxShadow: AppTheme.accentShadow),
-        child: Text(text, style: GoogleFonts.plusJakartaSans(color: Colors.white, fontWeight: FontWeight.w600)),
+        child: Text(text, style: GoogleFonts.outfit(color: Colors.white, fontWeight: FontWeight.w600)),
       ),
     );
   }

@@ -4,6 +4,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:go_router/go_router.dart';
 import '../../core/theme/app_theme.dart';
+import '../../core/services/audio_service.dart';
 
 class RouletteScreen extends StatefulWidget {
   const RouletteScreen({super.key});
@@ -71,6 +72,8 @@ class _RouletteScreenState extends State<RouletteScreen> with SingleTickerProvid
   }
 
   void _showResult() {
+    AudioService().playSuccess();
+    
     final totalSweep = 2 * math.pi;
     final singleSweep = totalSweep / _options.length;
     
@@ -106,18 +109,19 @@ class _RouletteScreenState extends State<RouletteScreen> with SingleTickerProvid
                 children: [
                   Container(
                     width: 90, height: 90,
-                    decoration: const BoxDecoration(
-                      color: AppTheme.accentGlow,
+                    decoration: BoxDecoration(
+                      gradient: AppTheme.accentGradient,
                       shape: BoxShape.circle,
+                      boxShadow: AppTheme.accentShadow,
                     ),
-                    child: const Center(child: Text('🎉', style: TextStyle(fontSize: 45))),
+                    child: const Center(child: Icon(Icons.celebration_rounded, size: 45, color: AppTheme.accent)),
                   ).animate().scale(duration: 500.ms, curve: Curves.elasticOut),
                   const SizedBox(height: 24),
-                  Text('Çarkın Kararı:', style: GoogleFonts.plusJakartaSans(fontSize: 16, fontWeight: FontWeight.w600, color: AppTheme.textTertiary)),
+                  Text('Çarkın Kararı:', style: GoogleFonts.outfit(fontSize: 16, fontWeight: FontWeight.w600, color: AppTheme.textTertiary)),
                   const SizedBox(height: 12),
                   Text(
                     winner,
-                    style: GoogleFonts.plusJakartaSans(fontSize: 34, fontWeight: FontWeight.w900, color: AppTheme.textPrimary, letterSpacing: -1),
+                    style: GoogleFonts.outfit(fontSize: 34, fontWeight: FontWeight.w900, color: AppTheme.textPrimary, letterSpacing: -1),
                     textAlign: TextAlign.center,
                   ).animate().fadeIn(delay: 200.ms).slideY(begin: 0.2),
                   const SizedBox(height: 32),
@@ -132,7 +136,7 @@ class _RouletteScreenState extends State<RouletteScreen> with SingleTickerProvid
                         boxShadow: AppTheme.accentShadow,
                       ),
                       child: Center(
-                        child: Text('Mükemmel Seçim!', style: GoogleFonts.plusJakartaSans(fontSize: 16, fontWeight: FontWeight.w800, color: Colors.white)),
+                        child: Text('Mükemmel Seçim!', style: GoogleFonts.outfit(fontSize: 16, fontWeight: FontWeight.w800, color: Colors.white)),
                       ),
                     ),
                   ),
@@ -157,6 +161,7 @@ class _RouletteScreenState extends State<RouletteScreen> with SingleTickerProvid
   void _addOption() {
     final text = _textController.text.trim();
     if (text.isNotEmpty && !_options.contains(text)) {
+      AudioService().playPop();
       setState(() {
         _options.add(text);
         _textController.clear();
@@ -166,6 +171,7 @@ class _RouletteScreenState extends State<RouletteScreen> with SingleTickerProvid
 
   void _removeOption(int index) {
     if (_options.length > 2) {
+      AudioService().playPop();
       setState(() {
         _options.removeAt(index);
       });
@@ -225,8 +231,8 @@ class _RouletteScreenState extends State<RouletteScreen> with SingleTickerProvid
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Kararsız mı kaldın?', style: GoogleFonts.plusJakartaSans(fontSize: 12, color: AppTheme.textTertiary)),
-                Text('Çarkı Çevir', style: GoogleFonts.plusJakartaSans(fontSize: 22, fontWeight: FontWeight.w800, color: AppTheme.textPrimary, letterSpacing: -0.5)),
+                Text('Kararsız mı kaldın?', style: GoogleFonts.outfit(fontSize: 12, color: AppTheme.textTertiary)),
+                Text('Çarkı Çevir', style: GoogleFonts.outfit(fontSize: 22, fontWeight: FontWeight.w800, color: AppTheme.textPrimary, letterSpacing: -0.5)),
               ],
             ),
           ),
@@ -263,27 +269,38 @@ class _RouletteScreenState extends State<RouletteScreen> with SingleTickerProvid
         ),
         // Center cap
         Container(
-          width: 48, height: 48,
+          width: 54, height: 54,
           decoration: BoxDecoration(
             color: Colors.white,
             shape: BoxShape.circle,
-            boxShadow: AppTheme.cardShadow,
-            border: Border.all(color: AppTheme.accent, width: 5),
+            boxShadow: [
+              BoxShadow(color: AppTheme.accent.withValues(alpha: 0.3), blurRadius: 15, spreadRadius: 5),
+            ],
+            border: Border.all(color: AppTheme.accent, width: 6),
+          ),
+          child: Center(
+            child: Container(
+              width: 16, height: 16,
+              decoration: const BoxDecoration(
+                gradient: AppTheme.accentGradient,
+                shape: BoxShape.circle,
+              ),
+            ),
           ),
         ),
         // Pointer at the top
         Positioned(
-          top: -20,
+          top: -15,
           child: Container(
-            width: 56, height: 56,
+            width: 48, height: 48,
             decoration: BoxDecoration(
-              color: Colors.white,
+              gradient: AppTheme.accentGradient,
               shape: BoxShape.circle,
-              boxShadow: AppTheme.cardShadow,
-              border: Border.all(color: AppTheme.accent, width: 4),
+              boxShadow: AppTheme.accentShadow,
+              border: Border.all(color: Colors.white, width: 4),
             ),
             child: const Center(
-              child: Icon(Icons.arrow_drop_down_rounded, color: AppTheme.accent, size: 50),
+              child: Icon(Icons.keyboard_arrow_down_rounded, color: Colors.white, size: 32),
             ),
           ),
         ),
@@ -304,7 +321,7 @@ class _RouletteScreenState extends State<RouletteScreen> with SingleTickerProvid
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Seçenekleri Düzenle', style: GoogleFonts.plusJakartaSans(fontSize: 14, fontWeight: FontWeight.w700, color: AppTheme.textPrimary)),
+            Text('Seçenekleri Düzenle', style: GoogleFonts.outfit(fontSize: 14, fontWeight: FontWeight.w700, color: AppTheme.textPrimary)),
             const SizedBox(height: 12),
             Wrap(
               spacing: 8,
@@ -322,7 +339,7 @@ class _RouletteScreenState extends State<RouletteScreen> with SingleTickerProvid
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text(text, style: GoogleFonts.plusJakartaSans(fontSize: 13, fontWeight: FontWeight.w600, color: _colors[idx % _colors.length])),
+                      Text(text, style: GoogleFonts.outfit(fontSize: 13, fontWeight: FontWeight.w600, color: _colors[idx % _colors.length])),
                       const SizedBox(width: 6),
                       GestureDetector(
                         onTap: () => _removeOption(idx),
@@ -346,11 +363,11 @@ class _RouletteScreenState extends State<RouletteScreen> with SingleTickerProvid
                     ),
                     child: TextField(
                       controller: _textController,
-                      style: GoogleFonts.plusJakartaSans(fontSize: 13, color: AppTheme.textPrimary),
+                      style: GoogleFonts.outfit(fontSize: 13, color: AppTheme.textPrimary),
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         hintText: 'Yeni seçenek ekle...',
-                        hintStyle: GoogleFonts.plusJakartaSans(fontSize: 13, color: AppTheme.textTertiary),
+                        hintStyle: GoogleFonts.outfit(fontSize: 13, color: AppTheme.textTertiary),
                       ),
                       onSubmitted: (_) => _addOption(),
                     ),
@@ -396,12 +413,12 @@ class _RouletteScreenState extends State<RouletteScreen> with SingleTickerProvid
                 ? Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                     const SizedBox(width: 20, height: 20, child: CircularProgressIndicator(color: AppTheme.accent, strokeWidth: 2)),
                     const SizedBox(width: 12),
-                    Text('Çevriliyor...', style: GoogleFonts.plusJakartaSans(fontSize: 16, fontWeight: FontWeight.w600, color: AppTheme.textSecondary)),
+                    Text('Çevriliyor...', style: GoogleFonts.outfit(fontSize: 16, fontWeight: FontWeight.w600, color: AppTheme.textSecondary)),
                   ])
                 : Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                     const Icon(Icons.casino_rounded, color: Colors.white, size: 26),
                     const SizedBox(width: 8),
-                    Text('ÇARKI ÇEVİR', style: GoogleFonts.plusJakartaSans(fontSize: 18, fontWeight: FontWeight.w800, color: Colors.white, letterSpacing: 1.5)),
+                    Text('ÇARKI ÇEVİR', style: GoogleFonts.outfit(fontSize: 18, fontWeight: FontWeight.w800, color: Colors.white, letterSpacing: 1.5)),
                   ]),
           ),
         ),
@@ -439,7 +456,7 @@ class _WheelPainter extends CustomPainter {
       final textPainter = TextPainter(
         text: TextSpan(
           text: text,
-          style: GoogleFonts.plusJakartaSans(
+          style: GoogleFonts.outfit(
             color: Colors.white,
             fontSize: 13,
             fontWeight: FontWeight.w700,
