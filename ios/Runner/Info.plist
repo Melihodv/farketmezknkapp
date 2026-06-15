@@ -28,10 +28,10 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Uygulama deneyiminizi iyileştirmek için konum bilginize ihtiyaç duyuyoruz.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Sana en yakın ve en iyi mekanları önerebilmemiz için konumuna erişmemiz gerekiyor.</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Sana en yakın ve en iyi mekanları önerebilmemiz için konumuna erişmemiz gerekiyor.</string>
+	<string>Uygulama deneyiminizi iyileştirmek için konum bilginize ihtiyaç duyuyoruz.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Profil fotoğrafını güncellemek için fotoğraf galerisine erişmemiz gerekiyor.</string>
 	<key>NSCameraUsageDescription</key>
