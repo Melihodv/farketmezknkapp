@@ -1,7 +1,7 @@
 name: farketmez_knk
 description: "Ne yapalım? Farketmez. - Arkadaş grupları için akıllı mekan öneri uygulaması"
 publish_to: 'none'
-version: 1.2.0+8
+version: 1.2.0+9
 
 environment:
   sdk: '>=3.2.0 <4.0.0'

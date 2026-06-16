@@ -286,11 +286,6 @@ class _MemoryScreenState extends State<MemoryScreen> {
   }
 
   Widget _buildVisitCard(BuildContext context, VisitModel visit, AppProvider provider) {
-    final catData = AppConstants.categories.firstWhere(
-      (c) => c['id'] == visit.placeCategory,
-      orElse: () => AppConstants.categories.first,
-    );
-
     final isBlocked = visit.isBlocked;
 
     return Container(

@@ -159,7 +159,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
                 borderRadius: BorderRadius.circular(16),
                 boxShadow: [
                   BoxShadow(
-                    color: AppTheme.accent.withOpacity(0.35),
+                    color: AppTheme.accent.withValues(alpha: 0.35),
                     blurRadius: 20,
                     offset: const Offset(0, 8),
                   ),
@@ -210,7 +210,7 @@ class _FeedbackScreenState extends State<FeedbackScreen> {
         duration: const Duration(milliseconds: 200),
         padding: const EdgeInsets.symmetric(vertical: 24),
         decoration: BoxDecoration(
-          color: selected ? color.withOpacity(0.15) : AppTheme.surfaceElevated,
+          color: selected ? color.withValues(alpha: 0.15) : AppTheme.surfaceElevated,
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
             color: selected ? color : AppTheme.cardBorder,

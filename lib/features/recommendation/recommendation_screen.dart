@@ -286,12 +286,13 @@ class _RecommendationScreenState extends State<RecommendationScreen> {
                   if (!_goingConfirmed)
                     GestureDetector(
                       onTap: () async {
+                        final router = GoRouter.of(context);
                         await provider.confirmGoingToPlace();
                         await _openMaps(place.latitude, place.longitude, place.name);
                         if (mounted) setState(() => _goingConfirmed = true);
                         if (mounted) {
                           Future.delayed(const Duration(seconds: 2), () {
-                            if (mounted) context.push('/feedback');
+                            if (mounted) router.push('/feedback');
                           });
                         }
                       },

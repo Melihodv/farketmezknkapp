@@ -16,7 +16,6 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   int _totalDiscoveries = 0;
   int _positiveCount = 0;
-  int _negativeCount = 0;
   bool _statsLoaded = false;
 
   @override
@@ -32,7 +31,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
     setState(() {
       _totalDiscoveries = visits.length;
       _positiveCount = visits.fold(0, (sum, v) => sum + v.positiveCount);
-      _negativeCount = visits.fold(0, (sum, v) => sum + v.negativeCount);
       _statsLoaded = true;
     });
   }
@@ -82,7 +80,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             trailing: Switch(
               value: provider.isSoundEnabled,
               onChanged: (_) => provider.toggleSound(),
-              activeColor: AppTheme.accent,
+              activeThumbColor: AppTheme.accent,
             ),
           ),
           const SizedBox(height: 8),
@@ -97,9 +95,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
             _buildSettingItem(Icons.login_rounded, 'Google ile Giriş Yap', 'Verilerini kaydet ve sync et',
               accent: true,
               onTap: () async {
+                final messenger = ScaffoldMessenger.of(context);
                 final u = await provider.signInWithGoogle();
                 if (u != null && mounted) {
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  messenger.showSnackBar(SnackBar(
                     content: Text('Hoş geldin ${u.displayName ?? ''}! 🎉', style: GoogleFonts.outfit(color: Colors.white)),
                     backgroundColor: AppTheme.success,
                     behavior: SnackBarBehavior.floating,
@@ -111,8 +110,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
           else ...[
             _buildSettingItem(Icons.logout_rounded, 'Çıkış Yap', 'Hesabından çık',
               onTap: () async {
+                final router = GoRouter.of(context);
                 await provider.signOut();
-                if (mounted) context.go('/');
+                if (mounted) router.go('/');
               },
             ),
             const SizedBox(height: 8),
@@ -128,9 +128,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       TextButton(onPressed: () => Navigator.of(ctx).pop(), child: Text('İptal', style: GoogleFonts.outfit(color: AppTheme.textSecondary))),
                       TextButton(
                         onPressed: () async {
+                          final router = GoRouter.of(context);
                           Navigator.of(ctx).pop();
                           await provider.deleteAccount();
-                          if (mounted) context.go('/');
+                          if (mounted) router.go('/');
                         },
                         child: Text('Hesabı Sil', style: GoogleFonts.outfit(color: AppTheme.error, fontWeight: FontWeight.w700)),
                       ),
