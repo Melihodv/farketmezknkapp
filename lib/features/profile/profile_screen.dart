@@ -91,31 +91,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
           // ─── Account ─────────────────────────────────────────
           _buildSectionHeader('Hesap'),
           const SizedBox(height: 10),
-          if (user?.isGuest ?? true)
-            _buildSettingItem(Icons.login_rounded, 'Google ile Giriş Yap', 'Verilerini kaydet ve sync et',
-              accent: true,
-              onTap: () async {
-                final messenger = ScaffoldMessenger.of(context);
-                final u = await provider.signInWithGoogle();
-                if (u != null && mounted) {
-                  messenger.showSnackBar(SnackBar(
-                    content: Text('Hoş geldin ${u.displayName ?? ''}! 🎉', style: GoogleFonts.outfit(color: Colors.white)),
-                    backgroundColor: AppTheme.success,
-                    behavior: SnackBarBehavior.floating,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                  ));
-                }
-              },
-            )
-          else ...[
-            _buildSettingItem(Icons.logout_rounded, 'Çıkış Yap', 'Hesabından çık',
-              onTap: () async {
-                final router = GoRouter.of(context);
-                await provider.signOut();
-                if (mounted) router.go('/');
-              },
-            ),
-            const SizedBox(height: 8),
+          _buildSettingItem(Icons.logout_rounded, 'Çıkış Yap', 'Hesabından çık',
+            onTap: () async {
+              final router = GoRouter.of(context);
+              await provider.signOut();
+              if (mounted) router.go('/');
+            },
+          ),
+          const SizedBox(height: 8),
+          if (!(user?.isGuest ?? true))
             _buildSettingItem(Icons.delete_forever_rounded, 'Hesabımı Sil', 'Tüm verilerini kalıcı olarak sil',
               danger: true,
               onTap: () async {
@@ -140,7 +124,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 );
               },
             ),
-          ],
 
           // ─── Legal ───────────────────────────────────────────
           _buildSectionHeader('Yasal'),

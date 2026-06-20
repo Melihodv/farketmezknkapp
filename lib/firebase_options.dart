@@ -30,7 +30,6 @@ class DefaultFirebaseOptions {
     authDomain: 'farketmezknk-257ca.firebaseapp.com',
     storageBucket: 'farketmezknk-257ca.firebasestorage.app',
   );
-
   // Web
 
   static const FirebaseOptions android = FirebaseOptions(
@@ -40,7 +39,6 @@ class DefaultFirebaseOptions {
     projectId: 'farketmezknk-257ca',
     storageBucket: 'farketmezknk-257ca.firebasestorage.app',
   );
-
   // Android — com.farketmezknk.farketmez_knk
 
   static const FirebaseOptions ios = FirebaseOptions(
@@ -49,10 +47,9 @@ class DefaultFirebaseOptions {
     messagingSenderId: '768393681101',
     projectId: 'farketmezknk-257ca',
     storageBucket: 'farketmezknk-257ca.firebasestorage.app',
-    androidClientId: '768393681101-9rrrr8vndamla7fst18eg5kdcrn5t4tg.apps.googleusercontent.com',
+    androidClientId: '768393681101-0m9tufh57bak9iap716d57u8gdcq4vc2.apps.googleusercontent.com',
     iosClientId: '768393681101-gtaqbalbuo3q3r1l9j62l4kh7dlf7tfo.apps.googleusercontent.com',
     iosBundleId: 'com.farketmezknk.farketmezKnk',
   );
-
   // iOS — com.farketmezknk (Bundle ID)
 }

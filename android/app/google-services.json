@@ -14,11 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "768393681101-9rrrr8vndamla7fst18eg5kdcrn5t4tg.apps.googleusercontent.com",
+          "client_id": "768393681101-0m9tufh57bak9iap716d57u8gdcq4vc2.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.farketmezknk.farketmez_knk",
-            "certificate_hash": "a56a4b9b6b7a87551ef50dd5a53d563db05d5653"
+            "certificate_hash": "898b6e2d620bec48abd7f9db1cc1c01415267e76"
           }
         },
         {
