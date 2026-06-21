@@ -42,14 +42,14 @@ class DefaultFirebaseOptions {
   // Android — com.farketmezknk.farketmez_knk
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBKDB7N3DnBSyKV9FtS_izn-RJzKNgT6ro',
-    appId: '1:768393681101:ios:a193e618e0858d7976b184',
+    apiKey: 'AIzaSyCg8Os-rjupxOkCXAeHwHoYZHhdraAJNQQ',
+    appId: '1:768393681101:ios:7ebd235e90ab2dfe76b184',
     messagingSenderId: '768393681101',
     projectId: 'farketmezknk-257ca',
     storageBucket: 'farketmezknk-257ca.firebasestorage.app',
     androidClientId: '768393681101-0m9tufh57bak9iap716d57u8gdcq4vc2.apps.googleusercontent.com',
-    iosClientId: '768393681101-gtaqbalbuo3q3r1l9j62l4kh7dlf7tfo.apps.googleusercontent.com',
-    iosBundleId: 'com.farketmezknk.farketmezKnk',
+    iosClientId: '768393681101-vfdfe1gosblic1s0ikp9fs7uqec6gug3.apps.googleusercontent.com',
+    iosBundleId: 'com.ottovate.farketmezknk',
   );
-  // iOS — com.farketmezknk (Bundle ID)
+  // iOS — com.ottovate.farketmezknk (Bundle ID)
 }

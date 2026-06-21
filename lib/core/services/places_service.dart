@@ -8,18 +8,16 @@ import '../models/place_model.dart';
 import '../utils/logger.dart';
 
 class PlacesService {
-  // Google Maps yerine kendi Cloud Functions backend'imizi çağırıyoruz
-  static const String _baseUrl = 'https://us-central1-farketmezknk-257ca.cloudfunctions.net';
-  
-  // API Key artık uygulamanın içinde güvenlik riski yaratmıyor, 
-  // backend'de saklanıyor. Fakat parametre uyumluluğu için hala tutabiliriz.
+  // Direkt Google Maps API
+  static const String _baseUrl = 'https://maps.googleapis.com/maps/api';
+
   final String apiKey;
 
   PlacesService({String? key}) : apiKey = key ?? AppConstants.googleMapsApiKey;
 
   Uri _buildUrl(String path, Map<String, String> params) {
-    // Cloud function'a parametreleri aynen geçiriyoruz
-    final query = params.entries.map((e) => '${e.key}=${Uri.encodeComponent(e.value)}').join('&');
+    final allParams = {...params, 'key': apiKey};
+    final query = allParams.entries.map((e) => '${e.key}=${Uri.encodeComponent(e.value)}').join('&');
     return Uri.parse('$_baseUrl$path?$query');
   }
 
@@ -68,7 +66,7 @@ class PlacesService {
         if (budgetLevel == 'ekonomik') params['maxprice'] = '1';
         else if (budgetLevel == 'orta') params['maxprice'] = '2';
 
-        final url = _buildUrl('/getNearbyPlaces', params);
+        final url = _buildUrl('/place/nearbysearch/json', params);
         final response = await http.get(url);
         if (response.statusCode == 200) {
           final data = _parseResponse(response);
@@ -153,7 +151,7 @@ class PlacesService {
   /// Mekan detayını getirir
   Future<Map<String, dynamic>?> getPlaceDetails(String placeId) async {
     try {
-      final url = _buildUrl('/getPlaceDetails', {
+      final url = _buildUrl('/place/details/json', {
         'place_id': placeId,
         'fields': 'name,formatted_address,formatted_phone_number,website,opening_hours,photos,rating,user_ratings_total,price_level',
         'language': 'tr',
@@ -177,7 +175,7 @@ class PlacesService {
     required double toLng,
   }) async {
     try {
-      final url = _buildUrl('/getDistanceMatrix', {
+      final url = _buildUrl('/distancematrix/json', {
         'origins': '$fromLat,$fromLng',
         'destinations': '$toLat,$toLng',
         'mode': 'walking',
@@ -236,7 +234,7 @@ class PlacesService {
   /// Koordinattan adres al
   Future<String> getAddressFromCoordinates(double lat, double lng) async {
     try {
-      final url = _buildUrl('/getGeocode', {'latlng': '$lat,$lng', 'language': 'tr'});
+      final url = _buildUrl('/geocode/json', {'latlng': '$lat,$lng', 'language': 'tr'});
       final response = await http.get(url);
       if (response.statusCode == 200) {
         final data = _parseResponse(response);
@@ -262,6 +260,6 @@ class PlacesService {
 
   /// Fotoğraf URL'si
   String getPhotoUrl(String photoReference, {int maxWidth = 800}) {
-    return '$_baseUrl/getPhoto?maxwidth=$maxWidth&photo_reference=$photoReference';
+    return '$_baseUrl/place/photo?maxwidth=$maxWidth&photo_reference=$photoReference&key=$apiKey';
   }
 }
