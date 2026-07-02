@@ -95,7 +95,7 @@ class AuthService {
         createdAt: DateTime.now(),
       );
     } catch (e, stack) {
-      AppLogger.error('signInWithApple failed', e, stack);
+      AppLogger.error('signInWithApple failed — check: 1) Firebase Console Apple provider enabled, 2) Apple Developer Sign in with Apple capability, 3) Team ID / Key ID / .p8 in Firebase', e, stack);
       return null;
     }
   }
@@ -119,7 +119,7 @@ class AuthService {
         createdAt: DateTime.now(),
       );
     } catch (e, stack) {
-      AppLogger.error('signInAsGuest failed', e, stack);
+      AppLogger.error('signInAsGuest failed — check Firebase Console: Authentication > Sign-in providers > Anonymous must be ENABLED', e, stack);
       return null;
     }
   }

@@ -117,7 +117,7 @@ class _SplashScreenState extends State<SplashScreen>
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            'Misafir girişi başarısız. Lütfen internet bağlantınızı kontrol edin.',
+            'Misafir girişi başarısız. Lütfen daha sonra tekrar deneyin.',
             style: GoogleFonts.outfit(fontWeight: FontWeight.w600),
           ),
           backgroundColor: AppTheme.error,
